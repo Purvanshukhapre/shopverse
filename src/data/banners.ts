@@ -1,0 +1,83 @@
+import type { Banner } from "@/types";
+
+export const heroSlides: Banner[] = [
+  {
+    id: "hero-1",
+    title: "Summer Collection 2026",
+    subtitle: "UP TO 60% OFF",
+    description: "Discover the latest trends in fashion. Premium styles, unmatched comfort.",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1400&h=600&fit=crop&q=80",
+    cta: "Shop Now",
+    ctaLink: "/fashion",
+  },
+  {
+    id: "hero-2",
+    title: "Tech Powerhouse",
+    subtitle: "NEW ARRIVALS",
+    description: "Cutting-edge electronics from world-class brands. Upgrade your life.",
+    image: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=1400&h=600&fit=crop&q=80",
+    cta: "Explore Tech",
+    ctaLink: "/electronics",
+  },
+  {
+    id: "hero-3",
+    title: "Home Makeover",
+    subtitle: "FLAT 40% OFF",
+    description: "Transform your space with designer furniture and premium decor.",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1400&h=600&fit=crop&q=80",
+    cta: "View Collection",
+    ctaLink: "/home",
+  },
+  {
+    id: "hero-4",
+    title: "Fitness First",
+    subtitle: "STARTING ₹999",
+    description: "Premium sportswear, equipment, and accessories for peak performance.",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&h=600&fit=crop&q=80",
+    cta: "Get Active",
+    ctaLink: "/sports",
+  },
+];
+
+export const promoBanners = [
+  {
+    id: "promo-1",
+    title: "Premium Fashion",
+    subtitle: "New Season Arrivals",
+    description: "Explore curated collections from top designers",
+    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&h=400&fit=crop&q=80",
+    cta: "Shop Fashion",
+    ctaLink: "/fashion",
+    size: "large" as const,
+  },
+  {
+    id: "promo-2",
+    title: "Smart Gadgets",
+    subtitle: "Up to 35% Off",
+    description: "Latest wearables and smart devices",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&h=400&fit=crop&q=80",
+    cta: "View Deals",
+    ctaLink: "/electronics",
+    size: "small" as const,
+  },
+  {
+    id: "promo-3",
+    title: "Beauty Essentials",
+    subtitle: "Curated for You",
+    description: "Premium skincare and cosmetics",
+    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&h=400&fit=crop&q=80",
+    cta: "Explore Beauty",
+    ctaLink: "/beauty",
+    size: "small" as const,
+  },
+  {
+    id: "promo-4",
+    title: "End of Season Sale",
+    subtitle: "Up to 70% Off",
+    description: "Massive discounts across all categories",
+    image: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=700&h=400&fit=crop&q=80",
+    cta: "Grab Now",
+    ctaLink: "/sale",
+    size: "large" as const,
+  },
+];

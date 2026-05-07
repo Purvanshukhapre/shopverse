@@ -1,0 +1,68 @@
+import type { Category } from "@/types";
+
+export const categories: Category[] = [
+  {
+    id: "cat-1",
+    name: "Fashion",
+    slug: "fashion",
+    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=500&fit=crop&q=80",
+    itemCount: 24500,
+    description: "Trending styles for every occasion",
+  },
+  {
+    id: "cat-2",
+    name: "Electronics",
+    slug: "electronics",
+    image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=400&h=500&fit=crop&q=80",
+    itemCount: 18200,
+    description: "Latest gadgets & accessories",
+  },
+  {
+    id: "cat-3",
+    name: "Mobiles",
+    slug: "mobiles",
+    image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=400&h=500&fit=crop&q=80",
+    itemCount: 8400,
+    description: "Smartphones & tablets",
+  },
+  {
+    id: "cat-4",
+    name: "Appliances",
+    slug: "appliances",
+    image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=400&h=500&fit=crop&q=80",
+    itemCount: 12800,
+    description: "Home & kitchen essentials",
+  },
+  {
+    id: "cat-5",
+    name: "Beauty",
+    slug: "beauty",
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=500&fit=crop&q=80",
+    itemCount: 15600,
+    description: "Skincare, makeup & more",
+  },
+  {
+    id: "cat-6",
+    name: "Grocery",
+    slug: "grocery",
+    image: "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?w=400&h=500&fit=crop&q=80",
+    itemCount: 32000,
+    description: "Daily essentials delivered",
+  },
+  {
+    id: "cat-7",
+    name: "Furniture",
+    slug: "furniture",
+    image: "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=400&h=500&fit=crop&q=80",
+    itemCount: 9800,
+    description: "Modern living spaces",
+  },
+  {
+    id: "cat-8",
+    name: "Sports",
+    slug: "sports",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&h=500&fit=crop&q=80",
+    itemCount: 11200,
+    description: "Gear up for performance",
+  },
+];
