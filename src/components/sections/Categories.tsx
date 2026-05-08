@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
 
 export default function Categories() {
   return (
-    <section className="py-20 md:py-32 bg-[#F8F8F8] border-t border-gray-100">
-      <div className="max-w-[1600px] mx-auto px-6">
+    <section className="section-padding bg-white border-t border-gray-50">
+      <div className="container-premium">
         <ScrollReveal>
-          <SectionHeader
-            title="Explore Premium Collections"
-            subtitle="Curated essentials for a sophisticated lifestyle."
-            viewAllHref="/categories"
-          />
+          <div className="flex flex-col items-center text-center mb-16">
+            <span className="label-premium mb-4">Discovery</span>
+            <h2 className="h2 mb-4">Premium Collections</h2>
+            <p className="text-body max-w-xl">Curated essentials for a sophisticated lifestyle.</p>
+          </div>
         </ScrollReveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">

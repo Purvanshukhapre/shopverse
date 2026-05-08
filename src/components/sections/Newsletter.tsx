@@ -1,54 +1,92 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Send, ArrowRight, Mail } from "lucide-react";
+import Image from "next/image";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
 export default function Newsletter() {
   return (
-    <section className="py-20 md:py-32 bg-[#0A0A0A] relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[150%] bg-white/5 rotate-12 blur-3xl rounded-full" />
-        <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[150%] bg-white/5 -rotate-12 blur-3xl rounded-full" />
-      </div>
+    <section className="section-padding bg-[#F8F8F8] overflow-hidden">
+      <div className="container-premium">
+        <div className="bg-[#111111] rounded-[48px] overflow-hidden relative min-h-[500px] flex items-center">
+          {/* Editorial Background Image (Faded) */}
+          <div className="absolute inset-0 z-0">
+             <Image 
+               src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=80" 
+               alt="Lifestyle" 
+               fill 
+               className="object-cover opacity-20 grayscale"
+             />
+             <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/90 to-transparent" />
+          </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10 text-center">
-        <ScrollReveal>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
-            Join the inner circle
-          </h2>
-          <p className="text-white/70 mb-10 max-w-xl mx-auto text-sm md:text-base">
-            Subscribe to our newsletter and be the first to know about exclusive
-            offers, new product launches, and shopping trends.
-          </p>
+          <div className="relative z-10 w-full px-8 md:px-16 lg:px-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <ScrollReveal>
+                <div className="max-w-xl">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Mail className="w-5 h-5 text-[#DC2626]" />
+                    <span className="text-[11px] font-black text-white/40 uppercase tracking-[0.4em]">
+                      The Editorial List
+                    </span>
+                  </div>
+                  
+                  <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-6">
+                    Curated <span className="text-[#DC2626]">Intelligence.</span><br />
+                    Delivered Weekly.
+                  </h2>
+                  
+                  <p className="text-lg text-white/50 mb-10 leading-relaxed font-medium">
+                    Join over 50,000 retail visionaries receiving exclusive insights, early access to limited drops, and global trend reports.
+                  </p>
 
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col sm:flex-row max-w-md mx-auto gap-3"
-          >
-            <div className="relative flex-1">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                required
-                suppressHydrationWarning
-                className="w-full h-12 px-5 bg-white/10 border border-white/20 text-white placeholder:text-white/50 rounded-xl focus:outline-none focus:border-white/50 transition-colors"
-              />
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="flex flex-col sm:flex-row gap-4 group"
+                  >
+                    <div className="relative flex-1">
+                      <input
+                        type="email"
+                        placeholder="Your elite email address"
+                        required
+                        className="w-full h-16 px-6 bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:outline-none focus:border-[#DC2626]/50 transition-all text-sm font-medium"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="h-16 px-10 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded-2xl hover:bg-[#DC2626] hover:text-white transition-all flex items-center justify-center gap-3 shadow-2xl shadow-black/20"
+                    >
+                      Initialize Access
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </form>
+
+                  <p className="text-[10px] font-bold text-white/20 mt-6 uppercase tracking-widest">
+                    Unsubscribe with a single click. Zero Noise. Pure Signal.
+                  </p>
+                </div>
+              </ScrollReveal>
+
+              <div className="hidden lg:block">
+                 <div className="grid grid-cols-2 gap-6">
+                    {[
+                      { label: "New Arrivals", val: "+240" },
+                      { label: "Global Trends", val: "Weekly" },
+                      { label: "Exclusive Offers", val: "Elite" },
+                      { label: "Priority fulfillment", icon: ArrowRight },
+                    ].map((item, i) => (
+                      <ScrollReveal key={i} delay={0.2 + i * 0.1}>
+                        <div className="p-8 rounded-[32px] border border-white/5 bg-white/5 backdrop-blur-sm">
+                           <p className="text-[10px] font-black text-[#DC2626] uppercase tracking-widest mb-2">{item.label}</p>
+                           <p className="text-2xl font-black text-white">{item.val || "Active"}</p>
+                        </div>
+                      </ScrollReveal>
+                    ))}
+                 </div>
+              </div>
             </div>
-            <button
-              type="submit"
-              className="h-12 px-8 bg-white text-[#0A0A0A] font-semibold rounded-xl hover:bg-[#F3F4F6] transition-colors flex items-center justify-center gap-2 group whitespace-nowrap"
-            >
-              Subscribe
-              <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </button>
-          </form>
-
-          <p className="text-xs text-white/40 mt-6">
-            By subscribing, you agree to our Terms of Service and Privacy Policy.
-            You can unsubscribe at any time.
-          </p>
-        </ScrollReveal>
+          </div>
+        </div>
       </div>
     </section>
   );

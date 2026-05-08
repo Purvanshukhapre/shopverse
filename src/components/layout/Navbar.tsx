@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -16,14 +16,21 @@ import { categories } from "@/data/categories";
 import SearchBar from "./SearchBar";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { setSearchOpen } from "@/store/slices/uiSlice";
 import Link from "next/link";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 export default function Navbar() {
   const { scrollDirection, isAtTop } = useScrollDirection();
+  const dispatch = useAppDispatch();
+  const [mounted, setMounted] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const cartItems = useAppSelector((state) => state.cart.items);
   const wishlistItems = useAppSelector((state) => state.wishlist.items);
@@ -41,8 +48,8 @@ export default function Navbar() {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isAtTop
-            ? "bg-white"
-            : "bg-white/95 backdrop-blur-md shadow-lg shadow-black/5"
+            ? "bg-white/80 backdrop-blur-md"
+            : "bg-white/90 backdrop-blur-xl shadow-premium border-b border-gray-100"
         }`}
       >
         {/* Top Bar (Professional Utility) */}
@@ -89,9 +96,19 @@ export default function Navbar() {
               </h1>
             </Link>
 
-            {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-2xl mx-auto">
-              <SearchBar />
+            {/* Search Trigger (Refined - Removed Redundancy) */}
+            <div className="hidden md:flex flex-1 max-w-xl mx-auto">
+              <button 
+                onClick={() => dispatch(setSearchOpen(true))}
+                className="w-full h-11 px-6 bg-[#F8F8F8] border border-gray-100 rounded-full flex items-center gap-3 text-[#777777] hover:border-gray-300 hover:bg-white transition-all group"
+              >
+                <Grid3X3 className="w-4 h-4 text-[#111111]" />
+                <span className="text-[13px] font-medium">Search the ShopEverse ecosystem...</span>
+                <div className="ml-auto flex items-center gap-1.5">
+                   <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">⌘</span>
+                   <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">K</span>
+                </div>
+              </button>
             </div>
 
             {/* Right Actions */}
@@ -118,7 +135,7 @@ export default function Navbar() {
                 aria-label="Wishlist"
               >
                 <Heart className="w-6 h-6 text-[#555555] group-hover:text-[#111111] group-hover:scale-110 transition-all" />
-                {wishlistCount > 0 && (
+                {mounted && wishlistCount > 0 && (
                   <span className="absolute top-1.5 right-1.5 w-5 h-5 bg-[#111111] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-lg shadow-black/20 animate-fade-in">
                     {wishlistCount}
                   </span>
@@ -132,7 +149,7 @@ export default function Navbar() {
                 aria-label="Cart"
               >
                 <ShoppingCart className="w-6 h-6 text-white group-hover:scale-110 transition-all" />
-                {cartCount > 0 && (
+                {mounted && cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#DC2626] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-lg shadow-red-500/20 animate-fade-in">
                     {cartCount}
                   </span>

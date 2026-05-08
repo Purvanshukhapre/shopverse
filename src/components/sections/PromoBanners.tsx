@@ -7,8 +7,8 @@ import { promoBanners } from "@/data/banners";
 
 export default function PromoBanners() {
   return (
-    <section className="py-20 md:py-32 bg-white">
-      <div className="max-w-[1600px] mx-auto px-6">
+    <section className="section-padding bg-[#F8F8F8]">
+      <div className="container-premium">
         <ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {promoBanners.map((banner, index) => (

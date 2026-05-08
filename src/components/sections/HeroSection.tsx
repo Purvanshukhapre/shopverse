@@ -4,8 +4,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, TrendingUp, Zap } from "lucide-react";
 import { heroSlides } from "@/data/banners";
+import { cn } from "@/lib/utils";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,16 +14,15 @@ import "swiper/css/effect-fade";
 
 export default function HeroSection() {
   return (
-    <section className="relative">
+    <section className="relative bg-[#F8F8F8]">
       {/* Main Hero Carousel */}
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
         pagination={{
           clickable: true,
-          bulletActiveClass: "!bg-[#0A0A0A] !opacity-100 !w-8",
-          bulletClass:
-            "inline-block w-2.5 h-2.5 rounded-full bg-[#0A0A0A]/30 mx-1 cursor-pointer transition-all duration-300",
+          bulletActiveClass: "!bg-white !opacity-100 !w-12",
+          bulletClass: "inline-block w-3 h-1.5 rounded-full bg-white/30 mx-1.5 cursor-pointer transition-all duration-500",
         }}
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -31,59 +31,75 @@ export default function HeroSection() {
       >
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden group">
+            <div className="relative h-[650px] md:h-[800px] lg:h-[900px] overflow-hidden group">
               <Image
                 src={slide.image}
                 alt={slide.title}
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover scale-100 transition-transform duration-[12000ms] ease-out group-hover:scale-105"
+                className="object-cover scale-100 transition-transform duration-[20000ms] ease-out group-hover:scale-110"
               />
-              {/* Overlay - Sophisticated vignette for readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              
+              {/* Cinematic Vignette & Depth */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <div className="absolute inset-0 bg-black/10 z-0" />
 
-              {/* Content */}
-              <div className="absolute inset-0 flex items-center">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full">
-                  <div className="max-w-4xl">
-                    <motion.span 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      className="inline-block text-[10px] md:text-xs font-bold text-white/70 uppercase tracking-[0.4em] mb-4 md:mb-6"
+              {/* Dramatic Content Layer */}
+              <div className="absolute inset-0 z-20 flex items-center">
+                <div className="container-premium w-full">
+                  <div className="max-w-5xl">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="flex items-center gap-3 mb-8"
                     >
-                      {slide.subtitle}
-                    </motion.span>
+                      <div className="h-px w-12 bg-white/40" />
+                      <span className="text-[11px] font-black text-white uppercase tracking-[0.5em]">
+                        {slide.subtitle}
+                      </span>
+                    </motion.div>
+                    
                     <motion.h2 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
-                      className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] tracking-tight mb-6 md:mb-8"
+                      transition={{ duration: 1, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
+                      className="text-6xl sm:text-7xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.95] tracking-tighter mb-10"
                     >
-                      {slide.title}
+                      {slide.title.split(' ').map((word, i) => (
+                        <span key={i} className={i === 1 ? "text-white/40 block md:inline" : "block md:inline"}>
+                          {word}{' '}
+                        </span>
+                      ))}
                     </motion.h2>
+
                     <motion.p 
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.4 }}
-                      className="text-base md:text-lg text-white/80 mb-8 md:mb-12 max-w-xl leading-relaxed font-medium"
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                      className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl leading-relaxed font-medium"
                     >
                       {slide.description}
                     </motion.p>
+                    
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.6 }}
+                      className="flex flex-wrap items-center gap-6"
                     >
                       <a
                         href={slide.ctaLink}
-                        className="inline-flex items-center gap-3 bg-white text-[#0A0A0A] px-8 md:px-10 py-4 md:py-5 text-sm font-bold rounded-full hover:bg-black hover:text-white transition-all duration-300 group"
+                        className="h-16 px-12 bg-white text-[#111111] font-black text-xs uppercase tracking-[0.3em] rounded-full flex items-center gap-4 hover:bg-[#DC2626] hover:text-white transition-all duration-500 shadow-2xl shadow-black/20 group"
                       >
                         {slide.cta}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                       </a>
+                      <button className="h-16 px-10 border border-white/30 text-white font-black text-xs uppercase tracking-[0.3em] rounded-full flex items-center gap-3 hover:bg-white/10 backdrop-blur-sm transition-all duration-500">
+                        View Lookbook
+                      </button>
                     </motion.div>
                   </div>
                 </div>
@@ -93,38 +109,37 @@ export default function HeroSection() {
         ))}
       </Swiper>
 
-      {/* Promotional Cards Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 -mt-16 md:-mt-24 lg:-mt-32 relative z-10 pb-8 md:pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      {/* Floating Insight Cards (High Density) */}
+      <div className="container-premium -mt-24 md:-mt-32 lg:-mt-40 relative z-30 pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { title: "New Arrivals", desc: "Fresh drops daily", color: "bg-white" },
-            { title: "Trending Now", desc: "Most popular picks", color: "bg-white" },
-            { title: "Best Sellers", desc: "Customer favorites", color: "bg-white" },
-            { title: "Clearance", desc: "Up to 70% off", color: "bg-white" },
-          ].map((card) => (
-            <a
+            { title: "Limited Drops", desc: "Premium releases only", icon: Sparkles, color: "text-amber-500" },
+            { title: "Market Trends", desc: "Top global analytics", icon: TrendingUp, color: "text-blue-500" },
+            { title: "Flash Access", desc: "Early member perks", icon: Zap, color: "text-[#DC2626]" },
+            { title: "Global Sync", desc: "Real-time inventory", icon: ArrowRight, color: "text-emerald-500" },
+          ].map((card, i) => (
+            <motion.a
               key={card.title}
               href="#"
-              className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 border border-[#E5E5E5] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-premium hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden relative"
             >
               <div className="relative z-10">
-                <h3 className="text-base md:text-lg font-bold text-[#0A0A0A] group-hover:text-[#525252] transition-colors mb-1">
+                <div className={cn("w-12 h-12 rounded-2xl bg-[#F8F8F8] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500", card.color)}>
+                  <card.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-black text-[#111111] mb-2 tracking-tight group-hover:text-[#DC2626] transition-colors">
                   {card.title}
                 </h3>
-                <p className="text-xs md:text-sm text-[#9CA3AF] font-medium mb-4 md:mb-6">
+                <p className="text-sm text-[#777777] font-medium tracking-tight">
                   {card.desc}
                 </p>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] md:text-xs font-bold text-[#0A0A0A] uppercase tracking-widest group-hover:underline decoration-2 underline-offset-4">
-                    Explore
-                  </span>
-                  <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
-                </div>
               </div>
-              <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-500">
-                <div className="w-16 h-16 md:w-24 md:h-24 bg-[#0A0A0A] rounded-full" />
-              </div>
-            </a>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#F8F8F8] rounded-full group-hover:scale-150 transition-transform duration-700 -z-0" />
+            </motion.a>
           ))}
         </div>
       </div>

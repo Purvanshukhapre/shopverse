@@ -6,6 +6,15 @@
    ============================================================ */
 
 :root {
+  /* --- Design System Tokens --- */
+  --section-spacing: 128px;
+  --container-max-width: 1600px;
+  --radius-premium: 24px;
+  --radius-button: 12px;
+  
+  /* --- Shimmer Animation --- */
+  --shimmer-duration: 2s;
+
   /* 1. COLORS (Strict Professional Scale) */
   --background: #F8F8F8; /* Premium off-white */
   --foreground: #111111; /* Primary Text */
@@ -44,6 +53,35 @@
   /* 4. NAVBAR REFERENCE */
   --navbar-h: 160px; /* Slightly taller for authority */
 }
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.shimmer {
+  animation: shimmer var(--shimmer-duration) infinite linear;
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 1000px 100%;
+}
+
+@layer base {
+  body {
+    @apply bg-[#F8F8F8] text-[#111111] antialiased selection:bg-[#111111] selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* --- Typography System --- */
+h1, .h1 { @apply text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.1]; }
+h2, .h2 { @apply text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter leading-[1.2]; }
+h3, .h3 { @apply text-xl md:text-2xl font-bold tracking-tight; }
+.label-premium { @apply text-[10px] font-black uppercase tracking-[0.2em] text-[#777777]; }
+.text-body { @apply text-[15px] leading-relaxed text-[#555555] font-medium; }
+
+/* --- Spacing Utils --- */
+.section-padding { @apply py-20 md:py-32; }
+.container-premium { @apply max-w-[1600px] mx-auto px-6; }
 
 @theme inline {
   --color-background: var(--background);

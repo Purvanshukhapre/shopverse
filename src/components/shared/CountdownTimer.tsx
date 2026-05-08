@@ -1,54 +1,77 @@
 "use client";
 
-import { useCountdown } from "@/hooks/useCountdown";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface CountdownTimerProps {
+interface CountdownProps {
   targetDate: Date;
 }
 
-export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
-  const { hours, minutes, seconds, isExpired } = useCountdown(targetDate);
-  const [mounted, setMounted] = useState(false);
+export default function CountdownTimer({ targetDate }: CountdownProps) {
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
 
-  if (!mounted) {
-    return (
-      <div className="flex items-center gap-1.5 opacity-0">
-        <span className="text-sm font-medium text-[#DC2626] mr-1">Ends in</span>
+      if (distance < 0) {
+        clearInterval(timer);
+        return;
+      }
+
+      setTimeLeft({
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  const Unit = ({ value, label }: { value: number; label: string }) => (
+    <div className="flex flex-col items-center">
+      <div className="relative group">
+        <div className="bg-[#111111] text-white text-xl md:text-2xl font-black w-12 md:w-16 h-14 md:h-16 rounded-xl flex items-center justify-center shadow-2xl shadow-black/20 overflow-hidden">
+          <AnimatePresence mode="popLayout">
+            <motion.span
+              key={value}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+              className="tabular-nums"
+            >
+              {String(value).padStart(2, "0")}
+            </motion.span>
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+        </div>
+        {/* Pulsing indicator for seconds */}
+        {label === "Secs" && (
+          <motion.div 
+            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            className="absolute -top-1 -right-1 w-3 h-3 bg-[#DC2626] rounded-full blur-[2px]"
+          />
+        )}
       </div>
-    );
-  }
-
-  if (isExpired) {
-    return (
-      <span className="text-sm font-medium text-[#DC2626]">Sale Ended</span>
-    );
-  }
-
-  const timeBlocks = [
-    { value: hours, label: "Hrs" },
-    { value: minutes, label: "Min" },
-    { value: seconds, label: "Sec" },
-  ];
+      <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#777777] mt-2">{label}</span>
+    </div>
+  );
 
   return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-sm font-medium text-[#DC2626] mr-1">Ends in</span>
-      {timeBlocks.map((block, index) => (
-        <div key={block.label} className="flex items-center gap-1.5">
-          <div className="bg-[#0A0A0A] text-white text-sm font-bold px-2 py-1 rounded min-w-[36px] text-center tabular-nums">
-            {String(block.value).padStart(2, "0")}
-          </div>
-          <span className="text-xs text-[#9CA3AF] uppercase">{block.label}</span>
-          {index < timeBlocks.length - 1 && (
-            <span className="text-[#0A0A0A] font-bold mx-0.5">:</span>
-          )}
-        </div>
-      ))}
+    <div className="flex items-center gap-3 md:gap-4">
+      <Unit value={timeLeft.hours} label="Hours" />
+      <span className="text-2xl font-black text-[#111111] -mt-6">:</span>
+      <Unit value={timeLeft.minutes} label="Mins" />
+      <span className="text-2xl font-black text-[#111111] -mt-6">:</span>
+      <Unit value={timeLeft.seconds} label="Secs" />
     </div>
   );
 }

@@ -18,16 +18,14 @@ export default function TrendingProducts() {
       : trendingProducts.filter((p) => p.category === activeTab);
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[#F4F4F5]">
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[2rem] md:rounded-[3rem] shadow-xl shadow-black/[0.02] border border-[#E5E5E5] p-6 sm:p-8 md:p-12 lg:p-16">
-          <ScrollReveal>
-          <SectionHeader
-            title="Trending Now"
-            subtitle="The most popular products loved by our customers"
-            viewAllHref="/trending"
-            viewAllText="View All Products"
-          />
+    <section className="section-padding bg-[#F8F8F8]">
+      <div className="container-premium">
+        <ScrollReveal>
+          <div className="flex flex-col items-center text-center mb-16">
+            <span className="label-premium mb-4">Market Demand</span>
+            <h2 className="h2 mb-4">Trending Now</h2>
+            <p className="text-body max-w-xl">Curated global favorites across every major category.</p>
+          </div>
         </ScrollReveal>
 
         {/* Tabs */}
@@ -74,16 +72,15 @@ export default function TrendingProducts() {
 
         {/* View All CTA */}
         <ScrollReveal delay={0.2}>
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-16">
             <a
               href="/trending"
-              className="px-8 py-3 border-2 border-[#0A0A0A] text-[#0A0A0A] text-sm font-semibold rounded-lg hover:bg-[#0A0A0A] hover:text-white transition-all duration-300"
+              className="h-14 px-12 bg-[#111111] text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-black transition-all flex items-center justify-center shadow-xl shadow-black/10"
             >
-              View All Products
+              Browse All Trends
             </a>
           </div>
         </ScrollReveal>
-        </div>
       </div>
     </section>
   );

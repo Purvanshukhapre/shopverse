@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronUp, Globe, MessageCircle, Mail, Share2, Smartphone, ShieldCheck, MapPin, Zap } from "lucide-react";
+import { ChevronUp, Smartphone, ShieldCheck, Zap, ArrowRight, Globe, Mail, MessageCircle, Share2 } from "lucide-react";
 import { SITE_NAME, FOOTER_LINKS } from "@/lib/constants";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,123 +12,110 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#111111] text-white">
-      {/* Back to Top (Minimalist Authority) */}
+      {/* ━━━ 1. BACK TO TOP (Sleek Authority) ━━━ */}
       <button
         onClick={scrollToTop}
-        className="w-full py-4 bg-white/5 hover:bg-white/10 transition-all text-[11px] font-black uppercase tracking-[0.3em] text-white/50 flex items-center justify-center gap-2 border-b border-white/5"
+        className="w-full py-6 bg-white/5 hover:bg-white/10 transition-all text-[11px] font-black uppercase tracking-[0.4em] text-white/40 flex items-center justify-center gap-3 border-b border-white/5 group"
       >
-        <ChevronUp className="w-4 h-4" />
-        Back to top
+        <ChevronUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+        Return to Elevation
       </button>
 
-      {/* Main Footer Content */}
-      <div className="max-w-[1600px] mx-auto px-6 py-20">
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
+      {/* ━━━ 2. PRIMARY FOOTER CONTENT ━━━ */}
+      <div className="container-premium py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-8">
           
-          {/* Brand Column */}
-          <div className="col-span-2 lg:col-span-2 space-y-8 pr-12">
+          {/* Brand Vision */}
+          <div className="lg:col-span-4 space-y-10 lg:pr-20">
              <Link href="/">
-                <h2 className="text-3xl font-black tracking-tighter">
+                <h2 className="text-4xl font-black tracking-tighter">
                   Shop<span className="text-[#DC2626]">Everse</span>
                 </h2>
              </Link>
-             <p className="text-sm text-[#777777] font-medium leading-relaxed max-w-sm">
-                The world's premier retail experience. Engineered for authenticity, speed, and luxury essentials. Experience the next generation of commerce.
+             <p className="text-base text-[#777777] font-medium leading-relaxed">
+                Defining the future of retail through engineering excellence and luxury curation. We don't just sell products; we deliver a premium standard of life.
              </p>
-             <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
-                      <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                   </div>
-                   <span className="text-[11px] font-black uppercase tracking-widest text-[#AAAAAA]">Certified Secure Retailer</span>
-                </div>
-                <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
-                      <Zap className="w-5 h-5 text-amber-400" />
-                   </div>
-                   <span className="text-[11px] font-black uppercase tracking-widest text-[#AAAAAA]">Global Express Network</span>
-                </div>
+             <div className="flex gap-4">
+                {[Globe, Mail, MessageCircle, Share2].map((Icon, i) => (
+                  <button key={i} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <Icon className="w-5 h-5" />
+                  </button>
+                ))}
              </div>
           </div>
 
-          {/* Links Columns */}
-          {Object.entries(FOOTER_LINKS).map(([title, links]) => (
-            <div key={title} className="col-span-1">
-              <h3 className="text-[11px] font-black text-white mb-8 uppercase tracking-[0.2em]">
-                {title}
-              </h3>
-              <ul className="space-y-4">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-[13px] text-[#777777] hover:text-white transition-colors font-medium"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+          {/* Quick Links (Simplified Hierarchy) */}
+          <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-12">
+            {Object.entries(FOOTER_LINKS).map(([title, links]) => (
+              <div key={title} className="space-y-8">
+                <h3 className="text-[11px] font-black uppercase tracking-[0.25em] text-white">
+                  {title}
+                </h3>
+                <ul className="space-y-4">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-[13px] text-[#777777] hover:text-white transition-colors font-semibold"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-        {/* Newsletter / App Download Strip */}
-        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
-           <div className="space-y-4">
-              <h4 className="text-[11px] font-black uppercase tracking-[0.2em]">Join the ecosystem</h4>
-              <div className="flex gap-2">
-                 <input 
+          {/* High-Impact Utility */}
+          <div className="lg:col-span-3 space-y-10 bg-white/5 p-10 rounded-[32px] border border-white/10">
+             <div className="space-y-4">
+                <h3 className="text-[11px] font-black uppercase tracking-[0.2em]">Join the ecosystem</h3>
+                <p className="text-xs text-[#777777] leading-relaxed">Early access, limited drops, and member-only pricing.</p>
+                <div className="relative group">
+                  <input 
                     type="email" 
-                    placeholder="Enter your email" 
-                    className="h-12 w-64 px-5 bg-white/5 border border-white/10 rounded-xl text-xs outline-none focus:border-white/30 transition-all"
-                 />
-                 <button className="h-12 px-8 bg-white text-[#111111] text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-gray-200 transition-all">
-                    Subscribe
-                 </button>
-              </div>
-           </div>
-
-           <div className="flex flex-col md:items-end gap-4">
-              <h4 className="text-[11px] font-black uppercase tracking-[0.2em]">Experience on Mobile</h4>
-              <div className="flex gap-3">
-                 <button className="h-12 px-6 border border-white/10 rounded-xl flex items-center gap-3 bg-white/5 hover:bg-white/10 transition-all group">
-                    <Smartphone className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    <div className="text-left">
-                       <p className="text-[9px] font-black text-white/50 uppercase leading-none">Get it on</p>
-                       <p className="text-xs font-black">App Store</p>
-                    </div>
-                 </button>
-                 <button className="h-12 px-6 border border-white/10 rounded-xl flex items-center gap-3 bg-white/5 hover:bg-white/10 transition-all group">
-                    <Globe className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    <div className="text-left">
-                       <p className="text-[9px] font-black text-white/50 uppercase leading-none">Download for</p>
-                       <p className="text-xs font-black">Android</p>
-                    </div>
-                 </button>
-              </div>
-           </div>
+                    placeholder="Email Address" 
+                    className="w-full h-14 bg-black border border-white/10 rounded-2xl px-6 text-sm outline-none focus:border-white/30 transition-all pr-12"
+                  />
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center hover:bg-[#DC2626] hover:text-white transition-all">
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </div>
+             </div>
+             
+             <div className="pt-8 border-t border-white/10 flex items-center gap-6">
+                <div className="flex flex-col">
+                   <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest mb-1">Global Support</span>
+                   <span className="text-sm font-bold">support@shopverse.io</span>
+                </div>
+                <div className="w-px h-8 bg-white/10" />
+                <div className="flex flex-col">
+                   <span className="text-[10px] font-black text-[#555555] uppercase tracking-widest mb-1">Status</span>
+                   <span className="text-sm font-bold text-emerald-500">Operational</span>
+                </div>
+             </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom Bar (Minimalist) */}
-      <div className="bg-black py-8 border-t border-white/5">
-        <div className="max-w-[1600px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex flex-col md:flex-row items-center gap-4 text-[11px] font-bold text-[#555555]">
-               <span>© {new Date().getFullYear()} {SITE_NAME} HOLDINGS. ALL RIGHTS RESERVED.</span>
-               <div className="hidden md:flex items-center gap-4 border-l border-white/10 pl-4">
-                  <a href="#" className="hover:text-white transition-colors">PRIVACY</a>
-                  <a href="#" className="hover:text-white transition-colors">TERMS</a>
-                  <a href="#" className="hover:text-white transition-colors">ACCESSIBILITY</a>
-               </div>
-            </div>
+      {/* ━━━ 3. SYSTEM STRIP ━━━ */}
+      <div className="bg-black py-12 border-t border-white/5">
+        <div className="container-premium flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-8 text-[11px] font-black tracking-widest text-[#444444] uppercase">
+             <span>© {new Date().getFullYear()} {SITE_NAME} SYSTEMS. EST. 2024.</span>
+             <div className="flex gap-8 border-l border-white/10 pl-8">
+                <a href="#" className="hover:text-white transition-colors">Security</a>
+                <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                <a href="#" className="hover:text-white transition-colors">Legal</a>
+             </div>
+          </div>
 
-            <div className="flex items-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">
-               <Image src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" width={40} height={12} />
-               <Image src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" width={24} height={24} />
-               <Image src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" width={48} height={12} />
-            </div>
+          <div className="flex items-center gap-10 opacity-30 grayscale group-hover:opacity-60 transition-all duration-700">
+             <Image src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" width={48} height={16} />
+             <Image src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" width={28} height={28} />
+             <Image src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" width={56} height={16} />
+             <Image src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" alt="Apple Pay" width={48} height={20} className="invert" />
           </div>
         </div>
       </div>
