@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   slug: string;
   image: string;
+  images?: string[];
   price: number;
   originalPrice: number;
   rating: number;
@@ -10,6 +11,13 @@ export interface Product {
   category: string;
   badge?: string;
   inStock: boolean;
+  description: string;
+  features?: string[];
+  specs?: Record<string, string>;
+  variants?: {
+    colors?: string[];
+    sizes?: string[];
+  };
 }
 
 export interface Category {
@@ -19,6 +27,7 @@ export interface Category {
   image: string;
   itemCount: number;
   description: string;
+  subcategories?: { name: string; slug: string; image?: string }[];
 }
 
 export interface Brand {
@@ -41,10 +50,52 @@ export interface NavItem {
   label: string;
   href: string;
   children?: NavItem[];
+  isMegaMenu?: boolean;
 }
 
 export interface TrustItem {
-  icon: string;
+  icon: any;
   title: string;
   description: string;
+}
+
+export interface CartItem extends Product {
+  quantity: number;
+  selectedColor?: string;
+  selectedSize?: string;
+}
+
+export interface Review {
+  id: string;
+  user: string;
+  avatar?: string;
+  rating: number;
+  date: string;
+  comment: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+}
+
+export interface Order {
+  id: string;
+  date: string;
+  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  total: number;
+  items: CartItem[];
+  shippingAddress: Address;
+}
+
+export interface Address {
+  fullName: string;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  phone: string;
 }

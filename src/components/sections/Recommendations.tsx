@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 import { Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import { recommendedProducts } from "@/data/products";
 
 import "swiper/css";

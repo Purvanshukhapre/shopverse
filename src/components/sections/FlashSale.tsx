@@ -5,7 +5,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight, Zap } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import CountdownTimer from "@/components/shared/CountdownTimer";
 import { flashSaleProducts } from "@/data/products";
 

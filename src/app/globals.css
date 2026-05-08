@@ -1,29 +1,310 @@
 @import "tailwindcss";
 
+/* ============================================================
+   SHOPEVERSE — GLOBAL DESIGN TOKENS
+   Primary theme: Clean white + dark black + red accent
+   Matches home page aesthetic exactly
+   ============================================================ */
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0A0A0A;
+
+  /* Brand Colors */
+  --primary: #0A0A0A;
+  --primary-rgb: 10, 10, 10;
+  --primary-hover: #1a1a1a;
+
+  --accent: #DC2626;       /* Sale red, deals, discounts */
+  --accent-hover: #b91c1c;
+
+  --success: #16a34a;      /* In-stock, free delivery, trust signals */
+  --warning: #f59e0b;      /* New badge, limited stock */
+  --info: #2563eb;         /* Bank offers, info badges */
+
+  /* Neutral Palette */
+  --surface: #FCFCFC;
+  --surface-2: #F4F4F5;
+  --surface-3: #E4E4E7;
+  --border: #E5E7EB;
+  --border-dark: #D1D5DB;
+
+  /* Typography */
+  --text-primary: #0A0A0A;
+  --text-secondary: #525252;
+  --text-muted: #9CA3AF;
+  --text-faint: #D1D5DB;
+
+  /* Navbar height reference */
+  --navbar-h: 150px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE RESETS
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ============================================================
+   SCROLLBAR UTILITIES
+   ============================================================ */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin custom scrollbar for content areas */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ============================================================
+   COMPONENT REUSABLE CLASSES
+   ============================================================ */
+
+/* Sticky filter sidebar */
+.filter-sidebar-sticky {
+  position: sticky;
+  top: var(--navbar-h);
+  height: calc(100vh - var(--navbar-h));
+  overflow-y: auto;
+}
+
+/* Page layout for shop/category pages */
+.shop-layout {
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100vh - var(--navbar-h));
+}
+
+/* Price display */
+.price-current {
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+.price-original {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+.price-discount {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+/* Badge classes */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+.badge-sale    { background: #FEE2E2; color: #DC2626; }
+.badge-new     { background: #D1FAE5; color: #065F46; }
+.badge-hot     { background: #FEF3C7; color: #92400E; }
+.badge-top     { background: #EDE9FE; color: #5B21B6; }
+
+/* Trust signal row */
+.trust-signal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Input focus ring */
+.input-base {
+  width: 100%;
+  padding: 0 16px;
+  height: 48px;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.input-base:focus {
+  border-color: var(--primary);
+}
+.input-base.error {
+  border-color: var(--accent);
+}
+
+/* Button variants */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 8px;
+  padding: 0 32px;
+  height: 52px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  border: none;
+}
+.btn-primary:hover  { background: var(--primary-hover); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 8px;
+  padding: 0 32px;
+  height: 52px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 2px solid var(--primary);
+}
+.btn-outline:hover  { background: var(--primary); color: white; }
+.btn-outline:active { transform: scale(0.98); }
+
+/* Animation keyframes */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes count-down {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up    { animation: slide-up 0.4s ease forwards; }
+.animate-pulse-dot   { animation: pulse-dot 1.5s ease infinite; }
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   PRODUCT GRID OPTIMIZATIONS
+   ============================================================ */
+.product-card-image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+.product-card-image-wrap img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.product-card-image-wrap:hover img {
+  transform: scale(1.08);
+}
+
+/* ============================================================
+   CHECKOUT RADIO / CHECKBOX FIX
+   ============================================================ */
+.payment-option input[type="radio"]:checked ~ .payment-option-box {
+  border-color: var(--primary);
+  background: #fafafa;
+}
+.payment-option input[type="radio"]:checked ~ .payment-option-box .radio-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+.radio-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* ============================================================
+   FLASH SALE / DEAL COUNTDOWN
+   ============================================================ */
+.countdown-digit {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   PAGE TRANSITIONS
+   ============================================================ */
+.page-enter {
+  animation: slide-up 0.3s ease both;
+}

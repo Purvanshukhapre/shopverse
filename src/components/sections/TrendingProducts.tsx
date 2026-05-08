@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import { trendingProducts } from "@/data/products";
 
 const TABS = ["All", "Fashion", "Electronics", "Home", "Beauty"];

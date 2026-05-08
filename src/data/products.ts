@@ -1,11 +1,16 @@
 import type { Product } from "@/types";
 
-export const flashSaleProducts: Product[] = [
+export const allProducts: Product[] = [
   {
     id: "fs-1",
     name: "Sony WH-1000XM5 Wireless Headphones",
     slug: "sony-wh1000xm5",
     image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&h=1000&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&h=1000&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&h=1000&fit=crop&q=80"
+    ],
     price: 22990,
     originalPrice: 34990,
     rating: 4.7,
@@ -13,12 +18,30 @@ export const flashSaleProducts: Product[] = [
     category: "Electronics",
     badge: "Lightning Deal",
     inStock: true,
+    description: "The WH-1000XM5 headphones rewrite the rules for distraction-free listening. Two processors control 8 microphones for unprecedented noise cancellation and exceptional call quality.",
+    features: [
+      "Industry-leading noise cancellation",
+      "Magnificent Sound, engineered to perfection",
+      "Crystal clear hands-free calling",
+      "Up to 30-hour battery life",
+      "Ultra-comfortable, lightweight design"
+    ],
+    specs: {
+      "Battery Life": "30 Hours",
+      "Charging Time": "3.5 Hours",
+      "Bluetooth": "v5.2",
+      "Weight": "250g"
+    }
   },
   {
     id: "fs-2",
     name: "Apple Watch Series 9 GPS 41mm",
     slug: "apple-watch-series9",
     image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=400&h=500&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=800&h=1000&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&h=1000&fit=crop&q=80"
+    ],
     price: 34900,
     originalPrice: 44900,
     rating: 4.6,
@@ -26,6 +49,20 @@ export const flashSaleProducts: Product[] = [
     category: "Electronics",
     badge: "Deal of the Day",
     inStock: true,
+    description: "Apple Watch Series 9 is more capable, intuitive, and faster. The new S9 SiP powers a superbright display and a magical new way to quickly and easily interact with your Apple Watch.",
+    features: [
+      "S9 SiP for more power",
+      "Double tap gesture support",
+      "Advanced health sensors",
+      "Crash Detection and Fall Detection",
+      "Carbon neutral options available"
+    ],
+    specs: {
+      "Display": "Always-On Retina",
+      "Water Resistance": "50m",
+      "Battery": "Up to 18 hours",
+      "Chip": "S9 SiP"
+    }
   },
   {
     id: "fs-3",
@@ -39,6 +76,17 @@ export const flashSaleProducts: Product[] = [
     category: "Fashion",
     badge: "40% Off",
     inStock: true,
+    description: "Nike's first lifestyle Air Max meets the softest, smoothest and most resilient foam yet. The design draws inspiration from the Air Max pantheon, showcasing Nike's greatest innovation.",
+    features: [
+      "Max Air 270 unit delivers comfort",
+      "Nike React technology provides a smooth ride",
+      "Woven and synthetic fabric on the upper",
+      "Heel-to-toe rubber for traction and durability"
+    ],
+    variants: {
+      colors: ["Black", "White", "Blue", "Red"],
+      sizes: ["7", "8", "9", "10", "11"]
+    }
   },
   {
     id: "fs-4",
@@ -49,9 +97,22 @@ export const flashSaleProducts: Product[] = [
     originalPrice: 134999,
     rating: 4.5,
     reviewCount: 15670,
-    category: "Mobiles",
+    category: "Electronics",
     badge: "Best Seller",
     inStock: true,
+    description: "The Galaxy S24 Ultra is the ultimate form of Galaxy Ultra. With its new titanium exterior and 6.8-inch flat display, it's an absolute marvel of design.",
+    features: [
+      "Titanium frame durability",
+      "Built-in S Pen",
+      "200MP Main Camera",
+      "Snapdragon 8 Gen 3 for Galaxy"
+    ],
+    specs: {
+      "Display": "6.8\" QHD+ Dynamic AMOLED",
+      "Processor": "Snapdragon 8 Gen 3",
+      "RAM": "12GB",
+      "Storage": "256GB"
+    }
   },
   {
     id: "fs-5",
@@ -62,9 +123,16 @@ export const flashSaleProducts: Product[] = [
     originalPrice: 62900,
     rating: 4.8,
     reviewCount: 4520,
-    category: "Appliances",
+    category: "Home",
     badge: "Premium Pick",
     inStock: true,
+    description: "Barista-quality performance with a new intuitive interface that provides all the information you need to create third wave specialty coffee at home.",
+    features: [
+      "Integrated conical burr grinder",
+      "ThermoJet heating system",
+      "Powerful steam wand",
+      "Digital temperature control"
+    ]
   },
   {
     id: "fs-6",
@@ -78,6 +146,12 @@ export const flashSaleProducts: Product[] = [
     category: "Fashion",
     badge: "42% Off",
     inStock: true,
+    description: "One of the most iconic sunglass models in the world. Ray-Ban Aviator Classic sunglasses were originally designed for U.S. aviators in 1937.",
+    features: [
+      "High quality polarized lenses",
+      "Classic metal frame",
+      "Maximum clarity and protection"
+    ]
   },
   {
     id: "fs-7",
@@ -91,6 +165,7 @@ export const flashSaleProducts: Product[] = [
     category: "Electronics",
     badge: "Top Rated",
     inStock: true,
+    description: "Take the party with you no matter what the weather. The JBL Charge 5 speaker delivers bold JBL Original Pro Sound, with its optimized long excursion driver."
   },
   {
     id: "fs-8",
@@ -104,10 +179,8 @@ export const flashSaleProducts: Product[] = [
     category: "Fashion",
     badge: "50% Off",
     inStock: true,
+    description: "The definitive slim jeans. A lean look designed to fit like it's been tailored just for you. Levi's 511 Slim jeans are a modern slim with room to move."
   },
-];
-
-export const trendingProducts: Product[] = [
   {
     id: "tp-1",
     name: "MacBook Air M3 15-inch 256GB",
@@ -120,6 +193,7 @@ export const trendingProducts: Product[] = [
     category: "Electronics",
     badge: "New Launch",
     inStock: true,
+    description: "Supercharged by the M3 chip, MacBook Air is the world's most popular laptop. With up to 18 hours of battery life and a striking Liquid Retina display."
   },
   {
     id: "tp-2",
@@ -132,6 +206,7 @@ export const trendingProducts: Product[] = [
     reviewCount: 4230,
     category: "Fashion",
     inStock: true,
+    description: "Experience epic energy with the new Ultraboost Light, the lightest Ultraboost ever. The magic lies in the Light BOOST midsole."
   },
   {
     id: "tp-3",
@@ -145,6 +220,7 @@ export const trendingProducts: Product[] = [
     category: "Electronics",
     badge: "Trending",
     inStock: true,
+    description: "The thinnest Apple product ever. iPad Pro features an incredibly thin and light design, bringing portability to a whole new level."
   },
   {
     id: "tp-4",
@@ -157,6 +233,7 @@ export const trendingProducts: Product[] = [
     reviewCount: 2870,
     category: "Fashion",
     inStock: true,
+    description: "A clean, minimalist crossbody bag crafted from premium Italian leather. Perfect for your daily essentials."
   },
   {
     id: "tp-5",
@@ -169,6 +246,7 @@ export const trendingProducts: Product[] = [
     reviewCount: 8920,
     category: "Beauty",
     inStock: true,
+    description: "Transform your skin with our powerful anti-aging serum. Formulated with hyaluronic acid and Vitamin C."
   },
   {
     id: "tp-6",
@@ -182,6 +260,7 @@ export const trendingProducts: Product[] = [
     category: "Electronics",
     badge: "Editor's Choice",
     inStock: true,
+    description: "Create your best content with the Canon EOS R50. From sharp stills to 4K video, this mirrorless camera does it all."
   },
   {
     id: "tp-7",
@@ -194,6 +273,7 @@ export const trendingProducts: Product[] = [
     reviewCount: 5670,
     category: "Fashion",
     inStock: true,
+    description: "The slim, octagonal GA-2100 series. A design that inherits the DNA of the original G-SHOCK."
   },
   {
     id: "tp-8",
@@ -207,10 +287,8 @@ export const trendingProducts: Product[] = [
     category: "Home",
     badge: "Premium",
     inStock: true,
+    description: "The gold standard in office seating. Aeron's iconic design and ergonomic support have made it a favorite."
   },
-];
-
-export const recommendedProducts: Product[] = [
   {
     id: "rc-1",
     name: "AirPods Pro 2nd Gen USB-C",
@@ -223,67 +301,10 @@ export const recommendedProducts: Product[] = [
     category: "Electronics",
     badge: "Most Wished",
     inStock: true,
-  },
-  {
-    id: "rc-2",
-    name: "Under Armour Tech 2.0 T-Shirt",
-    slug: "ua-tech-tshirt",
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&q=80",
-    price: 1799,
-    originalPrice: 2999,
-    rating: 4.3,
-    reviewCount: 7650,
-    category: "Fashion",
-    inStock: true,
-  },
-  {
-    id: "rc-3",
-    name: "Kindle Paperwhite Signature Edition",
-    slug: "kindle-paperwhite",
-    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=500&fit=crop&q=80",
-    price: 14999,
-    originalPrice: 18999,
-    rating: 4.6,
-    reviewCount: 12340,
-    category: "Electronics",
-    inStock: true,
-  },
-  {
-    id: "rc-4",
-    name: "Premium Ceramic Plant Pot Set",
-    slug: "ceramic-plant-pots",
-    image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=500&fit=crop&q=80",
-    price: 1299,
-    originalPrice: 2499,
-    rating: 4.4,
-    reviewCount: 3420,
-    category: "Home",
-    inStock: true,
-  },
-  {
-    id: "rc-5",
-    name: "Bose QuietComfort Ultra Earbuds",
-    slug: "bose-qc-ultra",
-    image: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?w=400&h=500&fit=crop&q=80",
-    price: 24990,
-    originalPrice: 29990,
-    rating: 4.5,
-    reviewCount: 5670,
-    category: "Electronics",
-    badge: "Top Rated",
-    inStock: true,
-  },
-  {
-    id: "rc-6",
-    name: "Tommy Hilfiger Classic Oxford Shirt",
-    slug: "tommy-oxford-shirt",
-    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=500&fit=crop&q=80",
-    price: 3999,
-    originalPrice: 6999,
-    rating: 4.4,
-    reviewCount: 4560,
-    category: "Fashion",
-    badge: "43% Off",
-    inStock: true,
-  },
+    description: "AirPods Pro feature up to 2x more Active Noise Cancellation, plus Adaptive Transparency and Personalized Spatial Audio."
+  }
 ];
+
+export const flashSaleProducts = allProducts.filter(p => p.id.startsWith("fs-"));
+export const trendingProducts = allProducts.filter(p => p.id.startsWith("tp-"));
+export const recommendedProducts = allProducts.filter(p => p.id.startsWith("rc-"));

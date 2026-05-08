@@ -11,16 +11,25 @@ import {
   ChevronDown,
   Grid3X3,
 } from "lucide-react";
-import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { SITE_NAME, NAV_LINKS } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
+import { categories } from "@/data/categories";
 import SearchBar from "./SearchBar";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
+import { useAppSelector } from "@/store/hooks";
+import Link from "next/link";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 export default function Navbar() {
   const { scrollDirection, isAtTop } = useScrollDirection();
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const cartItems = useAppSelector((state) => state.cart.items);
+  const wishlistItems = useAppSelector((state) => state.wishlist.items);
+
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const wishlistCount = wishlistItems.length;
 
   const isVisible = scrollDirection === "up" || isAtTop;
 
@@ -76,11 +85,11 @@ export default function Navbar() {
             </button>
 
             {/* Logo */}
-            <a href="/" className="shrink-0">
+            <Link href="/" className="shrink-0">
               <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#0A0A0A]">
                 Shop<span className="text-[#525252]">Everse</span>
               </h1>
-            </a>
+            </Link>
 
             {/* Search Bar */}
             <div className="hidden md:flex flex-1">
@@ -101,25 +110,32 @@ export default function Navbar() {
               </button>
 
               {/* Wishlist */}
-              <a
-                href="#"
+              <Link
+                href="/wishlist"
                 className="relative p-2.5 rounded-lg hover:bg-[#F8F8F8] transition-colors group"
                 aria-label="Wishlist"
               >
                 <Heart className="w-5 h-5 text-[#525252] group-hover:text-[#0A0A0A] transition-colors" />
-              </a>
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#0A0A0A] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
 
               {/* Cart */}
-              <a
-                href="#"
+              <Link
+                href="/cart"
                 className="relative p-2.5 rounded-lg hover:bg-[#F8F8F8] transition-colors group"
                 aria-label="Cart"
               >
                 <ShoppingCart className="w-5 h-5 text-[#525252] group-hover:text-[#0A0A0A] transition-colors" />
-                <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#DC2626] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                  3
-                </span>
-              </a>
+                {cartCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#DC2626] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
             </div>
           </div>
         </div>
@@ -141,21 +157,21 @@ export default function Navbar() {
                 />
               </button>
               <div className="w-px h-5 bg-[#E5E5E5] mx-1" />
-              {NAV_LINKS.slice(0, 6).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
+              {categories.slice(0, 6).map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/category/${category.slug}`}
                   className="px-3 h-full flex items-center text-sm text-[#525252] hover:text-[#0A0A0A] hover:bg-[#F8F8F8] transition-colors rounded"
                 >
-                  {link.label}
-                </a>
+                  {category.name}
+                </Link>
               ))}
-              <a
-                href="#"
+              <Link
+                href="/deals"
                 className="px-3 h-full flex items-center text-sm font-semibold text-[#DC2626] hover:bg-red-50 transition-colors rounded ml-auto"
               >
                 Today&apos;s Deals
-              </a>
+              </Link>
             </div>
           </div>
 
