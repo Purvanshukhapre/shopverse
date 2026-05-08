@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   CreditCard, Truck, CheckCircle2, ChevronRight, MapPin,
   Smartphone, ArrowLeft, Loader2, ShieldCheck, Lock,
-  Package, Star, Globe, Wallet
+  Package, Star, Globe, Wallet, Zap
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
