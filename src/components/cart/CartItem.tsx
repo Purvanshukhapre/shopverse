@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Minus, Trash2, Heart } from "lucide-react";
+import { Plus, Minus, Trash2, Heart, ShieldCheck } from "lucide-react";
 import { CartItem as CartItemType } from "@/types";
-import { formatPrice, calculateDiscount } from "@/lib/utils";
+import { formatPrice, calculateDiscount, cn } from "@/lib/utils";
 import { useAppDispatch } from "@/store/hooks";
 import { updateQuantity, removeFromCart } from "@/store/slices/cartSlice";
 import { toggleWishlist } from "@/store/slices/wishlistSlice";
@@ -17,7 +17,6 @@ interface CartItemProps {
 export default function CartItem({ item }: CartItemProps) {
   const dispatch = useAppDispatch();
   const discount = calculateDiscount(item.originalPrice, item.price);
-  const savings  = (item.originalPrice - item.price) * item.quantity;
 
   const handleUpdateQuantity = (newQty: number) => {
     if (newQty < 1) return;
@@ -35,7 +34,7 @@ export default function CartItem({ item }: CartItemProps) {
       selectedColor: item.selectedColor,
       selectedSize: item.selectedSize,
     }));
-    toast.error(`${item.name} removed from cart`);
+    toast.error("Item removed from bag");
   };
 
   const handleMoveToWishlist = () => {
@@ -45,115 +44,110 @@ export default function CartItem({ item }: CartItemProps) {
       selectedColor: item.selectedColor,
       selectedSize: item.selectedSize,
     }));
-    toast.success(`${item.name} moved to wishlist`);
+    toast.success("Moved to Wishlist");
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all">
-      <div className="flex flex-col sm:flex-row gap-4 p-4 sm:p-5">
-        {/* Product Image */}
+    <div className="group p-6 sm:p-8 hover:bg-[#FBFBFB] transition-colors">
+      <div className="flex flex-col sm:flex-row gap-8 items-center">
+        
+        {/* 1. Image Area (Geometry Fixed) */}
         <Link
           href={`/product/${item.slug}`}
-          className="relative w-full sm:w-28 aspect-square flex-shrink-0 rounded-xl overflow-hidden bg-gray-50 border border-gray-100"
+          className="relative w-full sm:w-32 aspect-[4/5] flex-shrink-0 rounded-[12px] overflow-hidden bg-[#F8F8F8] border border-gray-100 group-hover:shadow-lg transition-all"
         >
-          <Image src={item.image} alt={item.name} fill className="object-contain p-2" />
+          <Image src={item.image} alt={item.name} fill className="object-contain p-3 group-hover:scale-105 transition-transform duration-500" />
           {discount > 0 && (
-            <div className="absolute top-1.5 left-1.5 bg-[#DC2626] text-white text-[8px] font-black px-1.5 py-0.5 rounded">
-              {discount}% OFF
+            <div className="absolute top-2 left-2 bg-[#DC2626] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">
+              -{discount}%
             </div>
           )}
         </Link>
 
-        {/* Product Details */}
-        <div className="flex flex-col flex-1 min-w-0">
-          {/* Top row: name + remove */}
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
-              <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mb-0.5">{item.category}</p>
+        {/* 2. Content Area (Hierarchy) */}
+        <div className="flex flex-col flex-1 min-w-0 w-full">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+            <div className="space-y-1">
+              <p className="text-[10px] font-black text-[#777777] uppercase tracking-[0.2em]">{item.category}</p>
               <Link href={`/product/${item.slug}`}>
-                <h3 className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 hover:text-blue-700 transition-colors">
+                <h3 className="text-lg font-bold text-[#111111] leading-tight hover:text-[#DC2626] transition-colors line-clamp-1">
                   {item.name}
                 </h3>
               </Link>
-              {/* Variants */}
-              {(item.selectedColor || item.selectedSize) && (
-                <div className="flex items-center gap-3 mt-1.5">
-                  {item.selectedColor && (
-                    <span className="text-[10px] text-gray-500 font-medium">
-                      Color: <span className="font-bold text-gray-700">{item.selectedColor}</span>
-                    </span>
-                  )}
-                  {item.selectedSize && (
-                    <span className="text-[10px] text-gray-500 font-medium">
-                      Size: <span className="font-bold text-gray-700">{item.selectedSize}</span>
-                    </span>
-                  )}
-                </div>
-              )}
+              
+              {/* Variant Details */}
+              <div className="flex flex-wrap items-center gap-4 mt-2">
+                {item.selectedColor && (
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full border border-black/10" style={{ backgroundColor: item.selectedColor.toLowerCase() }} />
+                    <span className="text-[11px] font-bold text-[#555555] uppercase tracking-widest">{item.selectedColor}</span>
+                  </div>
+                )}
+                {item.selectedSize && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-black text-[#777777] uppercase tracking-widest">Size:</span>
+                    <span className="text-[11px] font-black text-[#111111] bg-gray-100 px-2 py-0.5 rounded uppercase">{item.selectedSize}</span>
+                  </div>
+                )}
+              </div>
             </div>
-            <button
-              onClick={handleRemove}
-              className="flex-shrink-0 p-1.5 text-gray-300 hover:text-red-500 transition-colors rounded-full hover:bg-red-50"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
+
+            {/* Pricing Section (High Contrast) */}
+            <div className="text-right flex flex-col items-end">
+               <span className="text-xl font-black text-[#111111] tracking-tight">{formatPrice(item.price * item.quantity)}</span>
+               {item.quantity > 1 && (
+                 <span className="text-[10px] font-bold text-[#777777] uppercase tracking-widest mt-1">
+                   {formatPrice(item.price)} each
+                 </span>
+               )}
+            </div>
           </div>
 
-          {/* Price */}
-          <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-base font-black text-gray-900 tracking-tight">{formatPrice(item.price)}</span>
-            {item.originalPrice > item.price && (
-              <span className="text-xs text-gray-400 line-through font-medium">{formatPrice(item.originalPrice)}</span>
-            )}
-            {discount > 0 && (
-              <span className="text-xs font-black text-[#DC2626]">{discount}% off</span>
-            )}
+          <div className="flex items-center gap-2 mt-4">
+             <div className="flex items-center gap-1.5 px-2 py-0.5 bg-[#DCFCE7] text-[#15803D] rounded-md border border-emerald-100">
+                <ShieldCheck className="w-3 h-3" />
+                <span className="text-[10px] font-black uppercase tracking-widest">Premium Quality</span>
+             </div>
+             <span className="text-[10px] font-bold text-[#777777] uppercase tracking-widest">Free Express Shipping</span>
           </div>
 
-          {savings > 0 && (
-            <p className="text-[10px] font-bold text-emerald-600 mt-0.5">
-              You save: {formatPrice(savings)}
-            </p>
-          )}
-
-          {/* Delivery */}
-          <p className="text-[10px] font-bold text-emerald-600 mt-1.5 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            Free Delivery by Tomorrow
-          </p>
-
-          {/* Bottom row: qty + subtotal + wishlist */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mt-3 pt-3 border-t border-gray-100">
-            {/* Quantity Selector */}
-            <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg overflow-hidden">
+          {/* 3. Action Row (Stepper + Actions) */}
+          <div className="flex items-center justify-between mt-8">
+            {/* Professional Stepper (Segmented) */}
+            <div className="inline-flex items-center bg-[#F3F4F6] p-1 rounded-xl border border-gray-100 shadow-inner">
               <button
                 onClick={() => handleUpdateQuantity(item.quantity - 1)}
-                className="w-9 h-9 flex items-center justify-center hover:bg-gray-200 transition-colors text-gray-600"
+                className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white transition-all text-[#555555] disabled:opacity-30 active:scale-90"
+                disabled={item.quantity <= 1}
               >
-                <Minus className="w-3 h-3" />
+                <Minus className="w-4 h-4" />
               </button>
-              <span className="w-9 text-center text-sm font-black text-gray-900">{item.quantity}</span>
+              <div className="w-12 text-center text-sm font-black text-[#111111] tabular-nums">
+                {item.quantity}
+              </div>
               <button
                 onClick={() => handleUpdateQuantity(item.quantity + 1)}
-                className="w-9 h-9 flex items-center justify-center hover:bg-gray-200 transition-colors text-gray-600"
+                className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white transition-all text-[#555555] active:scale-90"
               >
-                <Plus className="w-3 h-3" />
+                <Plus className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-6">
               <button
                 onClick={handleMoveToWishlist}
-                className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 hover:text-red-500 transition-colors"
+                className="flex items-center gap-2 text-[11px] font-black text-[#555555] hover:text-[#DC2626] uppercase tracking-widest transition-colors"
               >
-                <Heart className="w-3.5 h-3.5" />
-                Save for Later
+                <Heart className="w-4 h-4" />
+                Move to Wishlist
               </button>
-
-              <div className="text-right">
-                <p className="text-[9px] text-gray-400 font-medium uppercase tracking-wider">Subtotal</p>
-                <p className="text-sm font-black text-gray-900">{formatPrice(item.price * item.quantity)}</p>
-              </div>
+              <button
+                onClick={handleRemove}
+                className="flex items-center gap-2 text-[11px] font-black text-[#555555] hover:text-[#111111] uppercase tracking-widest transition-colors"
+              >
+                <Trash2 className="w-4 h-4" />
+                Remove
+              </button>
             </div>
           </div>
         </div>

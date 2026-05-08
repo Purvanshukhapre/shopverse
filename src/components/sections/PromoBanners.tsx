@@ -1,51 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import { promoBanners } from "@/data/banners";
 
 export default function PromoBanners() {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[#F4F4F5]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+    <section className="py-20 md:py-32 bg-white">
+      <div className="max-w-[1600px] mx-auto px-6">
         <ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {promoBanners.map((banner, index) => (
               <ScrollReveal
                 key={banner.id}
                 delay={index * 0.1}
-                className={banner.size === "large" ? "md:col-span-1" : "md:col-span-1"}
+                className="group"
               >
                 <a
                   href={banner.ctaLink}
-                  className="group relative block rounded-xl overflow-hidden border border-[#E5E5E5] hover:border-[#D1D1D1] transition-all duration-300 hover:shadow-lg"
+                  className="relative block rounded-[32px] overflow-hidden border border-gray-100 shadow-soft transition-all duration-500 hover:shadow-premium hover:border-gray-200"
                 >
-                  <div className="relative h-[220px] sm:h-[260px] md:h-[300px] overflow-hidden">
+                  <div className="relative h-[300px] md:h-[400px] overflow-hidden">
                     <Image
                       src={banner.image}
                       alt={banner.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:via-black/40 transition-colors duration-500" />
+
+                    {/* Badge */}
+                    <div className="absolute top-6 left-6 flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20">
+                       <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                       <span className="text-[10px] font-black text-white uppercase tracking-widest">Limited Offer</span>
+                    </div>
 
                     {/* Content */}
-                    <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-7">
-                      <span className="text-xs font-semibold text-white/80 uppercase tracking-[0.15em] mb-1.5">
+                    <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12">
+                      <span className="text-[11px] font-black text-white/60 uppercase tracking-[0.25em] mb-3">
                         {banner.subtitle}
                       </span>
-                      <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight mb-1.5">
+                      <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-4 leading-tight max-w-sm">
                         {banner.title}
                       </h3>
-                      <p className="text-sm text-white/70 mb-4 max-w-xs">
+                      <p className="text-base text-white/70 mb-8 max-w-xs font-medium leading-relaxed">
                         {banner.description}
                       </p>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-white group-hover:gap-2.5 transition-all">
+                      <div className="inline-flex items-center gap-3 bg-white text-[#111111] px-6 py-3 rounded-xl font-black text-[11px] uppercase tracking-widest group-hover:gap-5 transition-all shadow-xl shadow-black/20 self-start">
                         {banner.cta}
                         <ArrowRight className="w-4 h-4" />
-                      </span>
+                      </div>
                     </div>
                   </div>
                 </a>
