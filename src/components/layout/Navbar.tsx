@@ -46,9 +46,9 @@ export default function Navbar() {
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 cubic-bezier(0.19, 1, 0.22, 1) ${
           isAtTop
-            ? "bg-white/80 backdrop-blur-md"
+            ? "bg-white/0 backdrop-blur-0 border-transparent"
             : "bg-white/90 backdrop-blur-xl shadow-premium border-b border-gray-100"
         }`}
       >
@@ -100,13 +100,15 @@ export default function Navbar() {
             <div className="hidden md:flex flex-1 max-w-xl mx-auto">
               <button 
                 onClick={() => dispatch(setSearchOpen(true))}
-                className="w-full h-11 px-6 bg-[#F8F8F8] border border-gray-100 rounded-full flex items-center gap-3 text-[#777777] hover:border-gray-300 hover:bg-white transition-all group"
+                className="w-full h-12 px-6 bg-[#F8F8F8] border border-gray-100 rounded-full flex items-center gap-3 text-[#777777] hover:border-gray-300 hover:bg-white focus-within:ring-4 focus-within:ring-black/5 focus-within:border-black transition-all duration-500 group"
               >
                 <Grid3X3 className="w-4 h-4 text-[#111111]" />
                 <span className="text-[13px] font-medium">Search the ShopEverse ecosystem...</span>
-                <div className="ml-auto flex items-center gap-1.5">
-                   <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">⌘</span>
-                   <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">K</span>
+                <div className="ml-auto flex items-center gap-2">
+                   <div className="flex items-center gap-1.5 opacity-40 group-hover:opacity-100 transition-opacity">
+                      <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">⌘</span>
+                      <span className="text-[10px] font-black bg-white px-1.5 py-0.5 rounded border border-gray-100 shadow-sm">K</span>
+                   </div>
                 </div>
               </button>
             </div>

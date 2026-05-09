@@ -75,7 +75,7 @@ export default function TrendingProducts() {
           <div className="flex justify-center mt-16">
             <a
               href="/trending"
-              className="h-14 px-12 bg-[#111111] text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-black transition-all flex items-center justify-center shadow-xl shadow-black/10"
+              className="btn-premium btn-primary shadow-premium hover:shadow-premium-hover"
             >
               Browse All Trends
             </a>

@@ -14,7 +14,7 @@ import "swiper/css/effect-fade";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-[#F8F8F8]">
+    <section className="relative bg-[#F8F8F8] overflow-hidden">
       {/* Main Hero Carousel */}
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
@@ -31,7 +31,7 @@ export default function HeroSection() {
       >
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative h-[650px] md:h-[800px] lg:h-[900px] overflow-hidden group">
+            <div className="relative h-[550px] md:h-[750px] lg:h-[850px] overflow-hidden group">
               <Image
                 src={slide.image}
                 alt={slide.title}
@@ -41,23 +41,23 @@ export default function HeroSection() {
                 className="object-cover scale-100 transition-transform duration-[20000ms] ease-out group-hover:scale-110"
               />
               
-              {/* Cinematic Vignette & Depth */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              {/* Cinematic Vignette & Depth (Refined Blending) */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
               <div className="absolute inset-0 bg-black/10 z-0" />
 
-              {/* Dramatic Content Layer */}
+              {/* Dramatic Content Layer (Wider Authority) */}
               <div className="absolute inset-0 z-20 flex items-center">
                 <div className="container-premium w-full">
-                  <div className="max-w-5xl">
+                  <div className="max-w-6xl"> {/* Increased max-width */}
                     <motion.div 
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.8, delay: 0.2 }}
-                      className="flex items-center gap-3 mb-8"
+                      className="flex items-center gap-4 mb-8"
                     >
-                      <div className="h-px w-12 bg-white/40" />
-                      <span className="text-[11px] font-black text-white uppercase tracking-[0.5em]">
+                      <div className="h-px w-16 bg-white/40" />
+                      <span className="label-premium !text-white/70">
                         {slide.subtitle}
                       </span>
                     </motion.div>
@@ -66,10 +66,10 @@ export default function HeroSection() {
                       initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 1, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
-                      className="text-6xl sm:text-7xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.95] tracking-tighter mb-10"
+                      className="text-6xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold text-white leading-[0.9] tracking-tighter mb-12"
                     >
                       {slide.title.split(' ').map((word, i) => (
-                        <span key={i} className={i === 1 ? "text-white/40 block md:inline" : "block md:inline"}>
+                        <span key={i} className={i === 1 ? "text-white/30 block md:inline" : "block md:inline"}>
                           {word}{' '}
                         </span>
                       ))}
@@ -79,25 +79,25 @@ export default function HeroSection() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.5 }}
-                      className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl leading-relaxed font-medium"
+                      className="text-lg md:text-xl text-white/60 mb-14 max-w-3xl leading-relaxed font-medium tracking-tight"
                     >
                       {slide.description}
                     </motion.p>
                     
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.6, delay: 0.6 }}
-                      className="flex flex-wrap items-center gap-6"
+                      className="flex flex-wrap items-center gap-8"
                     >
                       <a
                         href={slide.ctaLink}
-                        className="h-16 px-12 bg-white text-[#111111] font-black text-xs uppercase tracking-[0.3em] rounded-full flex items-center gap-4 hover:bg-[#DC2626] hover:text-white transition-all duration-500 shadow-2xl shadow-black/20 group"
+                        className="btn-premium btn-primary !h-[64px] !px-14 !bg-white !text-black hover:!bg-[#DC2626] hover:!text-white shadow-premium hover:shadow-premium-hover"
                       >
                         {slide.cta}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                       </a>
-                      <button className="h-16 px-10 border border-white/30 text-white font-black text-xs uppercase tracking-[0.3em] rounded-full flex items-center gap-3 hover:bg-white/10 backdrop-blur-sm transition-all duration-500">
+                      <button className="btn-premium !h-[64px] !px-12 border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm">
                         View Lookbook
                       </button>
                     </motion.div>
@@ -109,9 +109,9 @@ export default function HeroSection() {
         ))}
       </Swiper>
 
-      {/* Floating Insight Cards (High Density) */}
-      <div className="container-premium -mt-24 md:-mt-32 lg:-mt-40 relative z-30 pb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Floating Insight Cards (Refined Elevation) */}
+      <div className="container-premium -mt-20 md:-mt-28 relative z-30 pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             { title: "Limited Drops", desc: "Premium releases only", icon: Sparkles, color: "text-amber-500" },
             { title: "Market Trends", desc: "Top global analytics", icon: TrendingUp, color: "text-blue-500" },
@@ -125,20 +125,20 @@ export default function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-premium hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden relative"
+              className="bg-white p-10 rounded-[32px] border border-gray-100 shadow-premium hover:shadow-premium-hover hover:-translate-y-3 transition-all duration-700 group overflow-hidden relative"
             >
               <div className="relative z-10">
-                <div className={cn("w-12 h-12 rounded-2xl bg-[#F8F8F8] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500", card.color)}>
-                  <card.icon className="w-6 h-6" />
+                <div className={cn("w-14 h-14 rounded-2xl bg-[#F8F8F8] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-700", card.color)}>
+                  <card.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-black text-[#111111] mb-2 tracking-tight group-hover:text-[#DC2626] transition-colors">
+                <h3 className="text-2xl font-bold text-[#111111] mb-3 tracking-tighter group-hover:text-[#DC2626] transition-colors">
                   {card.title}
                 </h3>
-                <p className="text-sm text-[#777777] font-medium tracking-tight">
+                <p className="text-[15px] text-[#777777] font-medium tracking-tight leading-relaxed">
                   {card.desc}
                 </p>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#F8F8F8] rounded-full group-hover:scale-150 transition-transform duration-700 -z-0" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#F8F8F8] rounded-full group-hover:scale-150 transition-transform duration-1000 -z-0" />
             </motion.a>
           ))}
         </div>

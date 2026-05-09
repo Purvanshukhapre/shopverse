@@ -31,7 +31,7 @@ export default function Newsletter() {
                     </span>
                   </div>
                   
-                  <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-tight mb-6">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-[1.1] mb-6">
                     Curated <span className="text-[#DC2626]">Intelligence.</span><br />
                     Delivered Weekly.
                   </h2>
@@ -54,7 +54,7 @@ export default function Newsletter() {
                     </div>
                     <button
                       type="submit"
-                      className="h-16 px-10 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded-2xl hover:bg-[#DC2626] hover:text-white transition-all flex items-center justify-center gap-3 shadow-2xl shadow-black/20"
+                      className="btn-premium !h-16 !bg-white !text-black hover:!bg-[#DC2626] hover:!text-white shadow-premium"
                     >
                       Initialize Access
                       <ArrowRight className="w-4 h-4" />

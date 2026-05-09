@@ -90,13 +90,13 @@ export default function FlashSale() {
                                </span>
                                <span className="text-[#777777]">{100 - soldPercent} Left</span>
                             </div>
-                            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
-                              <motion.div 
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${soldPercent}%` }}
-                                transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-                                className="h-full bg-gradient-to-r from-[#DC2626] to-[#EF4444] rounded-full shadow-[0_0_8px_rgba(220,38,38,0.4)]"
-                              />
+                            <div className="h-2 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                                <motion.div 
+                                  initial={{ width: 0 }}
+                                  whileInView={{ width: `${soldPercent}%` }}
+                                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                                  className="h-full bg-gradient-to-r from-[#DC2626] to-[#EF4444] rounded-full shadow-[0_0_4px_rgba(220,38,38,0.2)]"
+                                />
                             </div>
                           </div>
                         </div>

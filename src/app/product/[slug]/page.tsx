@@ -33,32 +33,11 @@ export default async function ProductPage({ params }: Props) {
     .slice(0, 6);
 
   return (
-    <div className="bg-[#F4F4F5] min-h-screen">
+    <div className="bg-[#F8F8F8] min-h-screen">
       <Navbar />
 
-      {/* ━━━ Trust Bar (above fold) ━━━ */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
-          {[
-            { icon: Shield,  label: "Secure Payments",     sub: "100% protected" },
-            { icon: Check,   label: "Verified Products",   sub: "Genuine & authentic" },
-            { icon: Award,   label: "Easy Returns",        sub: "10-day hassle free" },
-          ].map(({ icon: Icon, label, sub }) => (
-            <div key={label} className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                <Icon className="w-3.5 h-3.5 text-emerald-600" />
-              </div>
-              <div className="leading-tight">
-                <p className="text-[11px] font-bold text-gray-800">{label}</p>
-                <p className="text-[9px] text-gray-400 font-medium">{sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ━━━ Main Product Section ━━━ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6">
+      {/* ━━━ Main Product Section (Refined Pacing) ━━━ */}
+      <section className="container-premium py-12">
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-4 flex-wrap">

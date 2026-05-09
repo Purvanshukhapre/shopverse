@@ -195,22 +195,22 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* ── 4. Main CTAs (52px height + Micro-interactions) ── */}
-      <div id="main-cta-section" className="flex flex-col sm:flex-row gap-4 pt-4">
+      <div id="main-cta-section" className="flex flex-col sm:flex-row gap-5 pt-6">
+        <button
+          className="btn-premium flex-1 bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-premium hover:shadow-premium-hover active:scale-95"
+        >
+          <Zap className="w-5 h-5 mr-3" />
+          Express Buy
+        </button>
         <button
           disabled={isAdding}
           onClick={handleAddToCart}
           className={cn(
-            "btn-premium flex-1 group active:scale-95",
-            isAdding ? "bg-[#15803D]" : "bg-[#111111] text-white hover:bg-black shadow-2xl shadow-black/10"
+            "btn-premium flex-1 group !bg-white !text-black border-2 border-gray-100 hover:border-black active:scale-95 transition-all duration-500",
+            isAdding ? "!bg-[#15803D] !text-white !border-emerald-500" : ""
           )}
         >
           {isAdding ? <><Check className="w-5 h-5 mr-3" /> Added Successfully</> : <><ShoppingCart className="w-5 h-5 mr-3 group-hover:-translate-y-1 transition-transform" /> Add To Bag</>}
-        </button>
-        <button
-          className="btn-premium flex-1 bg-[#DC2626] text-white hover:bg-[#B91C1C] shadow-2xl shadow-red-500/10 active:scale-95"
-        >
-          <Zap className="w-5 h-5 mr-3" />
-          Express Buy
         </button>
       </div>
 

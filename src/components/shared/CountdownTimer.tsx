@@ -37,7 +37,7 @@ export default function CountdownTimer({ targetDate }: CountdownProps) {
   const Unit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
       <div className="relative group">
-        <div className="bg-[#111111] text-white text-xl md:text-2xl font-black w-12 md:w-16 h-14 md:h-16 rounded-xl flex items-center justify-center shadow-2xl shadow-black/20 overflow-hidden">
+        <div className="bg-[#1A1A1A] text-white/90 text-xl md:text-2xl font-bold w-12 md:w-16 h-14 md:h-16 rounded-xl flex items-center justify-center shadow-lg shadow-black/5 overflow-hidden">
           <AnimatePresence mode="popLayout">
             <motion.span
               key={value}
