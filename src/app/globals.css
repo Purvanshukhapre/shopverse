@@ -77,9 +77,9 @@ h1, .h1 { @apply text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter lea
 h2, .h2 { @apply text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05]; }
 h3, .h3 { @apply text-xl md:text-3xl font-bold tracking-tight leading-tight; }
 
-.label-premium { @apply text-[10px] font-black uppercase tracking-[0.3em] text-[#777777] leading-none; }
-.text-body { @apply text-[15px] md:text-[16px] leading-relaxed text-[#555555] font-medium tracking-tight; }
-.text-subtitle { @apply text-body max-w-[60ch]; } /* Prevent exhaustive line lengths */
+@utility label-premium { @apply text-[10px] font-black uppercase tracking-[0.3em] text-[#777777] leading-none; }
+@utility text-body { @apply text-[15px] md:text-[16px] leading-relaxed text-[#555555] font-medium tracking-tight; }
+@utility text-subtitle { @apply text-body max-w-[60ch]; } /* Prevent exhaustive line lengths */
 
 /* --- Spacing Utils --- */
 .section-padding { @apply py-20 md:py-32; }
