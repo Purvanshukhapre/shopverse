@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -22,6 +23,8 @@ import Link from "next/link";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const headerRef = useRef<HTMLElement | null>(null);
   const { scrollDirection, isAtTop } = useScrollDirection();
   const dispatch = useAppDispatch();
   const [mounted, setMounted] = useState(false);
@@ -30,6 +33,20 @@ export default function Navbar() {
 
   useEffect(() => {
     setMounted(true);
+
+    const updateNavbarHeight = () => {
+      if (headerRef.current) {
+        document.documentElement.style.setProperty(
+          "--navbar-h",
+          `${headerRef.current.getBoundingClientRect().height}px`
+        );
+      }
+    };
+
+    updateNavbarHeight();
+    window.addEventListener("resize", updateNavbarHeight);
+
+    return () => window.removeEventListener("resize", updateNavbarHeight);
   }, []);
 
   const cartItems = useAppSelector((state) => state.cart.items);
@@ -43,12 +60,13 @@ export default function Navbar() {
   return (
     <>
       <motion.header
+        ref={headerRef}
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 cubic-bezier(0.19, 1, 0.22, 1) ${
           isAtTop
-            ? "bg-white/0 backdrop-blur-0 border-transparent"
+            ? "bg-white/90 backdrop-blur-xl shadow-premium border-b border-gray-100"
             : "bg-white/90 backdrop-blur-xl shadow-premium border-b border-gray-100"
         }`}
       >
@@ -79,7 +97,7 @@ export default function Navbar() {
 
         {/* Main Bar (Authority) */}
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="flex items-center gap-6 md:gap-10 h-20">
+          <div className="flex items-center gap-3 md:gap-4 h-20">
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
@@ -189,7 +207,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="/deals"
-                className="px-5 h-full flex items-center text-xs font-black text-[#DC2626] uppercase tracking-widest hover:bg-red-50 transition-all rounded-lg ml-auto"
+                className="px-4 py-2 h-full flex items-center text-xs font-black text-[#DC2626] uppercase tracking-widest hover:bg-red-50 transition-all rounded-full ml-auto"
               >
                 <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse mr-2" />
                 Flash Deals
@@ -213,14 +231,16 @@ export default function Navbar() {
         </div>
       </motion.header>
 
+      {pathname !== "/" && (
+        <div className="h-[var(--navbar-h)]" aria-hidden="true" />
+      )}
+
       {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
       />
 
-      {/* Spacer (Consistent for taller navbar) */}
-      <div className="h-[140px] md:h-[160px] lg:h-[180px]" />
     </>
   );
 }

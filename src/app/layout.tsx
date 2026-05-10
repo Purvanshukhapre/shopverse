@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 import { StoreProvider } from "@/store/provider";
 import QuickViewModal from "@/components/product/QuickViewModal";
 import SearchOverlay from "@/components/search/SearchOverlay";
+import NavigationLoader from "@/components/layout/NavigationLoader";
 import { Toaster } from "sonner";
 
 export default function RootLayout({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col selection:bg-[#0A0A0A] selection:text-white" suppressHydrationWarning>
         <StoreProvider>
           {children}
+          <NavigationLoader />
           <QuickViewModal />
           <SearchOverlay />
           <Toaster position="bottom-right" />

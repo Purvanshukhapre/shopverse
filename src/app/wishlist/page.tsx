@@ -11,9 +11,7 @@ export default function WishlistPage() {
   return (
     <div className="bg-[#F4F4F5] min-h-screen">
       <Navbar />
-      <div className="pt-20">
-        <WishlistClient />
-      </div>
+      <WishlistClient />
       <Footer />
     </div>
   );

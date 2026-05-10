@@ -51,7 +51,7 @@
   --radius-card: 16px;
 
   /* 4. NAVBAR REFERENCE */
-  --navbar-h: 160px; /* Slightly taller for authority */
+  --navbar-h: 44px; /* Actual fixed navbar height for internal page spacing */
 }
 
 @keyframes shimmer {
@@ -82,7 +82,7 @@ h3, .h3 { @apply text-xl md:text-3xl font-bold tracking-tight leading-tight; }
 @utility text-subtitle { @apply text-body max-w-[60ch]; } /* Prevent exhaustive line lengths */
 
 /* --- Spacing Utils --- */
-.section-padding { @apply py-20 md:py-32; }
+.section-padding { @apply py-12 md:py-16; }
 .container-premium { @apply max-w-[1600px] mx-auto px-6; }
 
 @theme inline {
@@ -300,6 +300,30 @@ p, .body-text {
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* --- ECOMMERCE LAYOUT FIXES (UI/UX Audit) --- */
+:root {
+  --section-spacing: 24px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+}
+.breadcrumb .active {
+  color: #111;
+  font-weight: 600;
+}
+
+.products-toolbar {
+  position: static;
 }
 
 /* Mobile Sticky CTA Container */

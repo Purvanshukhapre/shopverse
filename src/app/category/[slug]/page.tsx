@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     <div className="bg-white min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         <ShopClient 
           products={categoryProducts.length > 0 ? categoryProducts : allProducts} 
           title={`${category.name} Collection`}

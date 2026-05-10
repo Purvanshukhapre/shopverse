@@ -56,7 +56,7 @@ export default function FlashSale() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <div className="relative group">
+              <div className="relative">
                 <Swiper
                   modules={[Navigation, Autoplay]}
                   navigation={{

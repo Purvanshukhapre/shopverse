@@ -48,23 +48,6 @@ export default function ShopClient({ products, hideHeader, title, categoryName }
 
   return (
     <div className="bg-[#F8F8F8] min-h-screen">
-      {/* ── Top Bar (Authority Breadcrumb) ── */}
-      {!hideHeader && (
-        <div className="bg-white border-b border-gray-100">
-          <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center gap-3 text-[11px] font-bold text-[#777777] uppercase tracking-[0.15em]">
-            <Link href="/" className="hover:text-[#111111] transition-colors">Home</Link>
-            <div className="w-1 h-1 rounded-full bg-gray-200" />
-            <Link href="/shop" className="hover:text-[#111111] transition-colors">Shop</Link>
-            {categoryName && (
-              <>
-                <div className="w-1 h-1 rounded-full bg-gray-200" />
-                <span className="text-[#111111]">{categoryName}</span>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
       <div className="max-w-[1600px] mx-auto flex items-start">
 
         {/* ── Sidebar (Sticky with Authority) ── */}
@@ -93,7 +76,7 @@ export default function ShopClient({ products, hideHeader, title, categoryName }
 
           {/* Toolbar (Standardized + Alignment) */}
           <div
-            className="bg-white border-b border-gray-100 px-6 h-16 flex items-center justify-between sticky top-[var(--navbar-h,160px)] z-30 shadow-sm"
+            className="bg-white border-b border-gray-100 px-6 h-16 flex items-center justify-between"
           >
             <div className="flex items-center gap-6">
               {/* Mobile filter trigger */}
