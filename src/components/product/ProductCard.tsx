@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ShoppingCart, Check, Zap, Eye, Star } from "lucide-react";
+import { Heart, ShoppingCart, Check, Zap, Star } from "lucide-react";
 import { Product } from "@/types";
 import { cn, formatPrice, calculateDiscount } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -82,9 +82,6 @@ export default function ProductCard({ product, index = 0, layout = "grid" }: Pro
               )}
             >
               <Heart className={cn("w-5 h-5", isWishlisted && "fill-current")} />
-            </button>
-            <button className="w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-white/40 text-[#111111] flex items-center justify-center shadow-xl translate-x-14 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 delay-75 hover:bg-white hover:scale-110">
-              <Eye className="w-5 h-5" />
             </button>
           </div>
 
