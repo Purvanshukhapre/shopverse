@@ -15,6 +15,7 @@ import Link from "next/link";
 import { allProducts } from "@/data/products";
 
 export default function SellPage() {
+  const pathname = usePathname();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   
