@@ -12,8 +12,7 @@ import {
   ChevronDown,
   Grid3X3,
 } from "lucide-react";
-import { SITE_NAME } from "@/lib/constants";
-import { categories } from "@/data/categories";
+import { SITE_NAME, NAV_LINKS } from "@/lib/constants";
 import SearchBar from "./SearchBar";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
@@ -27,13 +26,10 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement | null>(null);
   const { scrollDirection, isAtTop } = useScrollDirection();
   const dispatch = useAppDispatch();
-  const [mounted, setMounted] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     const updateNavbarHeight = () => {
       if (headerRef.current) {
         document.documentElement.style.setProperty(
@@ -134,7 +130,11 @@ export default function Navbar() {
             {/* Right Actions */}
             <div className="flex items-center gap-2 md:gap-4">
               {/* Account */}
-              <button className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all group">
+              <Link
+                href="/auth/login"
+                className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all group"
+                aria-label="Account"
+              >
                 <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
                   <User className="w-5 h-5 text-[#555555] group-hover:text-[#111111]" />
                 </div>
@@ -144,7 +144,7 @@ export default function Navbar() {
                     Sign In <ChevronDown className="w-3 h-3" />
                   </span>
                 </span>
-              </button>
+              </Link>
 
               <div className="w-px h-8 bg-gray-100 hidden md:block" />
 
@@ -155,7 +155,7 @@ export default function Navbar() {
                 aria-label="Wishlist"
               >
                 <Heart className="w-6 h-6 text-[#555555] group-hover:text-[#111111] group-hover:scale-110 transition-all" />
-                {mounted && wishlistCount > 0 && (
+                {wishlistCount > 0 && (
                   <span className="absolute top-1.5 right-1.5 w-5 h-5 bg-[#111111] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-lg shadow-black/20 animate-fade-in">
                     {wishlistCount}
                   </span>
@@ -169,7 +169,7 @@ export default function Navbar() {
                 aria-label="Cart"
               >
                 <ShoppingCart className="w-6 h-6 text-white group-hover:scale-110 transition-all" />
-                {mounted && cartCount > 0 && (
+                {cartCount > 0 && (
                   <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#DC2626] text-white text-[10px] font-black rounded-full flex items-center justify-center shadow-lg shadow-red-500/20 animate-fade-in">
                     {cartCount}
                   </span>
@@ -196,13 +196,13 @@ export default function Navbar() {
                 />
               </button>
               <div className="w-px h-6 bg-gray-100 mx-2" />
-              {categories.slice(0, 8).map((category) => (
+              {NAV_LINKS.slice(0, 8).map((navItem) => (
                 <Link
-                  key={category.slug}
-                  href={`/category/${category.slug}`}
+                  key={navItem.label}
+                  href={navItem.href}
                   className="px-4 h-full flex items-center text-xs font-bold text-[#555555] uppercase tracking-wider hover:text-[#111111] hover:bg-gray-50 transition-all rounded-lg"
                 >
-                  {category.name}
+                  {navItem.label}
                 </Link>
               ))}
               <Link

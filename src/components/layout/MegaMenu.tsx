@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { categories } from "@/data/categories";
+import { NAV_LINKS } from "@/lib/constants";
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -30,24 +30,24 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
       >
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-5 gap-8">
-            {categories.slice(0, 5).map((category) => (
-              <div key={category.id}>
+            {NAV_LINKS.slice(0, 5).map((navItem) => (
+              <div key={navItem.label}>
                 <Link
-                  href={`/category/${category.slug}`}
+                  href={navItem.href}
                   onClick={onClose}
                   className="block text-sm font-black text-[#0A0A0A] uppercase tracking-wider mb-4 pb-2 border-b border-[#E5E5E5] hover:text-primary transition-colors"
                 >
-                  {category.name}
+                  {navItem.label}
                 </Link>
                 <ul className="space-y-3">
-                  {category.subcategories?.map((sub) => (
-                    <li key={sub.slug}>
+                  {navItem.children?.map((child) => (
+                    <li key={child.label}>
                       <Link
-                        href={`/category/${category.slug}/${sub.slug}`}
+                        href={child.href.replace(/\/shirts|\/trousers|\/jeans|\/jackets|\/footwear|\/accessories|\/dresses|\/tops|\/laptops|\/headphones|\/cameras|\/speakers|\/wearables|\/accessories|\/refrigerators|\/washing-machines|\/microwaves|\/air-purifiers|\/hepa|\/activated-carbon|\/smart|\/living-room|\/bedroom|\/dining|\/office|\/outdoor|\/storage|\/casual|\/formal|\/sports/g, '')}
                         className="text-sm font-medium text-[#525252] hover:text-[#0A0A0A] hover:translate-x-1 inline-block transition-all"
                         onClick={onClose}
                       >
-                        {sub.name}
+                        {child.label}
                       </Link>
                     </li>
                   ))}

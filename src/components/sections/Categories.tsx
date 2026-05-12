@@ -4,6 +4,7 @@ import Image from "next/image";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { categories } from "@/data/categories";
+import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export default function Categories() {
@@ -22,7 +23,7 @@ export default function Categories() {
           {categories.map((category, index) => (
             <ScrollReveal key={category.id} delay={index * 0.05}>
               <a
-                href={`/category/${category.slug}`}
+                href={`/${category.slug}`}
                 className="group relative block rounded-[24px] overflow-hidden bg-white border border-gray-100 transition-all duration-500 hover:shadow-premium hover:border-gray-200"
               >
                 {/* Image Area */}

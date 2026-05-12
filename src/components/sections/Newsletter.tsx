@@ -50,6 +50,7 @@ export default function Newsletter() {
                         placeholder="Your elite email address"
                         required
                         className="w-full h-16 px-6 bg-white/5 border border-white/10 text-white placeholder:text-white/30 rounded-2xl focus:outline-none focus:border-[#DC2626]/50 transition-all text-sm font-medium"
+                        suppressHydrationWarning={true}
                       />
                     </div>
                     <button

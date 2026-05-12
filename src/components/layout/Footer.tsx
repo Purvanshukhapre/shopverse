@@ -77,6 +77,7 @@ export default function Footer() {
                     type="email" 
                     placeholder="Email Address" 
                     className="w-full h-14 bg-black border border-white/10 rounded-2xl px-6 text-sm outline-none focus:border-white/30 transition-all pr-12"
+                    suppressHydrationWarning={true}
                   />
                   <button className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center hover:bg-[#DC2626] hover:text-white transition-all">
                     <ArrowRight className="w-5 h-5" />
@@ -103,7 +104,7 @@ export default function Footer() {
       <div className="bg-black py-12 border-t border-white/5">
         <div className="container-premium flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="flex flex-col md:flex-row items-center gap-8 text-[11px] font-black tracking-widest text-[#444444] uppercase">
-             <span>© {new Date().getFullYear()} {SITE_NAME} SYSTEMS. EST. 2024.</span>
+             <span>© 2026 {SITE_NAME} SYSTEMS. EST. 2024.</span>
              <div className="flex gap-8 border-l border-white/10 pl-8">
                 <a href="#" className="hover:text-white transition-colors">Security</a>
                 <a href="#" className="hover:text-white transition-colors">Privacy</a>
