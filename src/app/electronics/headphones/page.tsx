@@ -16,10 +16,9 @@ import { allProducts } from "@/data/products";
 import { notFound } from "next/navigation";
 
 export default function HeadphonesPage() {
+  const pathname = usePathname();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  const pathname = usePathname();
   
   useEffect(() => {
     const fetchProducts = () => {
