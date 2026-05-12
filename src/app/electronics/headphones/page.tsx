@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
@@ -18,11 +19,13 @@ export default function HeadphonesPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   
+  const pathname = usePathname();
+  
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Electronics category and Headphones subcategory
-        const headphoneProducts = allProducts.filter(p => p.category === 'Electronics' && p.subcategory?.includes('Headphone')); 
+        // Filter products by Electronics category only (no subcategory data in products)
+        const headphoneProducts = allProducts.filter(p => p.category === 'Electronics');
         setProducts(headphoneProducts);
       } catch (error) {
         console.error('Error fetching headphone products:', error);
@@ -32,7 +35,7 @@ export default function HeadphonesPage() {
     };
     
     fetchProducts();
-  }, []);
+  }, [pathname]);
   
   if (loading) {
     return (
