@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award, MapPin, Phone, Mail, Clock, Globe } from "lucide-react";
+import { Zap, Truck, Shield, MapPin, Phone, Clock, Globe, Users } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/product/ProductCard";
 import SkeletonCard from "@/components/product/SkeletonCard";
-import { toast } from "sonner";
 import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
@@ -51,7 +50,7 @@ export default function AboutPage() {
             <h1 className="h1 mb-4">About ShopEverse</h1>
             <p className="text-xl mb-6">Redefining retail through engineering excellence and luxury curation.</p>
             <p className="text-lg text-[#AAAAAA] mb-8">
-              We don't just sell products; we deliver a premium standard of life.
+              We don&apos;t just sell products; we deliver a premium standard of life.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/" className="btn-premium btn-primary !h-12 !px-8">
@@ -72,13 +71,13 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-lg text-[#555555] mb-6">
-                Founded in 2024, ShopEverse began as a vision to transform the e-commerce experience. 
-                We recognized that shopping should be more than just transactions—it should be an experience 
+                Founded in 2024, ShopEverse began as a vision to transform the e-commerce experience.&apos;
+                We recognized that shopping should be more than just transactions—it should be an experience&apos;
                 that delights, inspires, and elevates.
               </p>
               <p className="text-lg text-[#555555] mb-6">
-                Today, we're a team of engineers, designers, and retail experts dedicated to building the 
-                most sophisticated shopping platform in India. Our mission is simple: to make every purchase 
+                Today, we&apos;re a team of engineers, designers, and retail experts dedicated to building the&apos;
+                most sophisticated shopping platform in India. Our mission is simple: to make every purchase&apos;
                 feel like a premium experience.
               </p>
               <div className="flex items-center gap-3 mt-6">
@@ -122,7 +121,7 @@ export default function AboutPage() {
               </div>
               <h3 className="h3 mb-3">Lightning Fast</h3>
               <p className="text-[#555555]">
-                From browsing to checkout, our platform delivers instant responses. We've optimized every 
+                From browsing to checkout, our platform delivers instant responses. We&apos;ve optimized every&apos;
                 interaction to eliminate friction and maximize speed.
               </p>
             </div>

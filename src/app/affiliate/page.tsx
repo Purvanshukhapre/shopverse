@@ -2,14 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
+import { motion } from "framer-motion";
+import { Truck, Shield, Users, Package, Award } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/product/ProductCard";
 import SkeletonCard from "@/components/product/SkeletonCard";
-import { toast } from "sonner";
 import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
@@ -174,7 +172,7 @@ export default function AffiliatePage() {
                 <Package className="w-12 h-12 text-gray-400" />
               </div>
               <h3 className="h3 mb-2">No Featured Products Available</h3>
-              <p className="text-[#555555] mb-6">We're working on expanding our top performing products. Check back soon!</p>
+              <p className="text-[#555555] mb-6">We&apos;re working on expanding our top performing products. Check back soon!</p>
               <Link href="/" className="btn-premium btn-primary !h-12 !px-8">
                 Browse All Products
               </Link>
@@ -193,7 +191,7 @@ export default function AffiliatePage() {
             
             <div className="bg-white p-6 rounded-xl border border-gray-100">
               <h3 className="h3 mb-2">How are sales tracked?</h3>
-              <p className="text-[#555555]">We use cookie-based tracking that lasts for 30 days. If a customer clicks your link and makes a purchase within that timeframe, you'll receive credit.</p>
+              <p className="text-[#555555]">We use cookie-based tracking that lasts for 30 days. If a customer clicks your link and makes a purchase within that timeframe, you&apos;ll receive credit.</p>
             </div>
             
             <div className="bg-white p-6 rounded-xl border border-gray-100">

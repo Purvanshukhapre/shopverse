@@ -16,6 +16,7 @@ import { allProducts } from "@/data/products";
 import { notFound } from "next/navigation";
 
 export default function HeadphonesPage() {
+  // Get current pathname for browser back button navigation
   const pathname = usePathname();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
