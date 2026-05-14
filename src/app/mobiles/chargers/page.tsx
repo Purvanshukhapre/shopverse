@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
+import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield } from "lucide-react";
+import { RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/product/ProductCard";
@@ -193,7 +194,7 @@ export default function ChargersPage() {
                 <Package className="w-12 h-12 text-gray-400" />
               </div>
               <h3 className="h3 mb-2">No Chargers Available</h3>
-              <p className="text-[#555555] mb-6">We're working on expanding our charger collection. Check back soon!</p>
+              <p className="text-[#555555] mb-6">We&apos;re working on expanding our charger collection. Check back soon!</p>
               <Link href="/mobiles" className="btn-premium btn-primary !h-12 !px-8">
                 Browse All Mobiles
               </Link>
