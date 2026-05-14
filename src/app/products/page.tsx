@@ -150,12 +150,11 @@ export default function ProductsPage() {
           {/* Sidebar Filter */}
           <div className="lg:w-1/4">
             <FilterSidebar 
-              products={products} 
               categories={Array.from(new Set(products.map(p => p.category)))}
               brands={["Sony", "Apple", "Nike", "Samsung", "Adidas", "Canon", "Levi's"]}
               activeFilters={activeFilters}
               onFiltersChange={setActiveFilters}
-              category={categoryInfo.name}
+              onFilterChange={(filters) => {}}
             />
           </div>
           
