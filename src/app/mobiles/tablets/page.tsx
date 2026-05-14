@@ -90,12 +90,11 @@ export default function TabletsPage() {
           {/* Sidebar Filter */}
           <div className="lg:w-1/4">
             <FilterSidebar 
-              products={products} 
               categories={Array.from(new Set(products.map(p => p.category)))}
-              brands={"Apple", "Samsung", "Microsoft", "Lenovo", "Huawei"]}
+              brands={["Apple", "Samsung", "Microsoft", "Lenovo", "Huawei"]}
               activeFilters={[]}
               onFiltersChange={() => {}}
-              category="Electronics"
+              onFilterChange={(filters) => {}}
             />
           </div>
           
