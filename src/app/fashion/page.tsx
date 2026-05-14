@@ -23,8 +23,8 @@ export default function FashionPage() {
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Fashion category
-        const fashionProducts = allProducts.filter(p => p.category === 'Fashion');
+        // Get featured products for the fashion page
+        const fashionProducts = allProducts.filter(p => p.category === 'Fashion').slice(0, 8);
         setProducts(fashionProducts);
       } catch (error) {
         console.error('Error fetching fashion products:', error);
@@ -35,23 +35,6 @@ export default function FashionPage() {
     
     fetchProducts();
   }, [pathname]);
-  
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#F8F8F8]">
-        <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Fashion</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
   
   return (
     <div className="min-h-screen bg-[#F8F8F8]">
@@ -66,31 +49,30 @@ export default function FashionPage() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl"
           >
-            <h1 className="h1 mb-4">Premium Fashion</h1>
-            <p className="text-xl mb-6">Discover timeless style and modern elegance</p>
+            <h1 className="h1 mb-4">Fashion</h1>
+            <p className="text-xl mb-6">Trending styles for every occasion</p>
             <div className="flex flex-wrap gap-4">
               <Link href="/fashion/men" className="btn-premium btn-primary !h-12 !px-8">
-                Shop Men's Collection
+                Shop Men&apos;s Clothing
               </Link>
               <Link href="/fashion/women" className="btn-premium !h-12 !px-8 bg-white text-[#DC2626] hover:bg-gray-100">
-                Shop Women's Collection
+                Shop Women&apos;s Clothing
               </Link>
             </div>
           </motion.div>
         </div>
       </div>
       
-      {/* Category Navigation */}
+      {/* Subcategory Navigation */}
       <div className="container-premium py-12">
         <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: "Men's Clothing", href: "/fashion/men", image: "https://images.unsplash.com/photo-1527515635267-19c47f32010d?w=400&h=500&fit=crop&q=80" },
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[{ name: "Men's Clothing", href: "/fashion/men", image: "https://images.unsplash.com/photo-1527515635267-19c47f32010d?w=400&h=500&fit=crop&q=80" },
             { name: "Women's Clothing", href: "/fashion/women", image: "https://images.unsplash.com/photo-1527515635267-19c47f32010d?w=400&h=500&fit=crop&q=80" },
-            { name: "Kids' Wear", href: "/fashion/kids", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3241?w=400&h=500&fit=crop&q=80" },
-            { name: "Footwear", href: "/fashion/footwear", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3241?w=400&h=500&fit=crop&q=80" },
-            { name: "Watches", href: "/fashion/watches", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Bags & Wallets", href: "/fashion/bags", image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=500&fit=crop&q=80" },
+            { name: "Bags & Luggage", href: "/fashion/bags", image: "https://images.unsplash.com/photo-1553062407-98ee4648a197?w=400&h=500&fit=crop&q=80" },
+            { name: "Footwear", href: "/fashion/footwear", image: "https://images.unsplash.com/photo-1543163527-0514320a47fa?w=400&h=500&fit=crop&q=80" },
+            { name: "Kids Fashion", href: "/fashion/kids", image: "https://images.unsplash.com/photo-1521572152357-6b7e976a5b45?w=400&h=500&fit=crop&q=80" },
+            { name: "Watches", href: "/fashion/watches", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" }
           ].map((category, idx) => (
             <Link 
               key={idx}
@@ -117,13 +99,19 @@ export default function FashionPage() {
       {/* Featured Products */}
       <div className="container-premium pb-24">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Fashion Items</h2>
-          <Link href="/fashion" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+          <h2 className="h2">Featured Fashion</h2>
+          <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
             View All →
           </Link>
         </div>
         
-        {products.length > 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map((product, idx) => (
               <ProductCard 
@@ -133,10 +121,6 @@ export default function FashionPage() {
                 layout="grid"
               />
             ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No fashion products available at the moment.</p>
           </div>
         )}
       </div>

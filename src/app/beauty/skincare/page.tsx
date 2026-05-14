@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
@@ -12,6 +13,8 @@ import { toast } from "sonner";
 import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
+import FilterSidebar from "@/components/search/FilterSidebar";
+import NavigationLoader from "@/components/layout/NavigationLoader";
 import { notFound } from "next/navigation";
 
 export default function SkincarePage() {
@@ -21,8 +24,14 @@ export default function SkincarePage() {
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Beauty category (using Electronics as base)
-        const skincareProducts = allProducts.filter(p => p.category === 'Electronics'); 
+        // Get skincare products
+        const skincareProducts = allProducts.filter(p => p.category === 'Beauty' && 
+          (p.name.toLowerCase().includes('moisturizer') || 
+           p.name.toLowerCase().includes('cleanser') || 
+           p.name.toLowerCase().includes('serum') || 
+           p.name.toLowerCase().includes('sunscreen') || 
+           p.name.toLowerCase().includes('mask') || 
+           p.name.toLowerCase().includes('eye')));
         setProducts(skincareProducts);
       } catch (error) {
         console.error('Error fetching skincare products:', error);
@@ -38,14 +47,7 @@ export default function SkincarePage() {
     return (
       <div className="min-h-screen bg-[#F8F8F8]">
         <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Skincare</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
+        <NavigationLoader />
         <Footer />
       </div>
     );
@@ -78,65 +80,47 @@ export default function SkincarePage() {
         </div>
       </div>
       
-      {/* Subcategory Navigation */}
-      <div className="container-premium py-12">
-        <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: "Moisturizers", href: "/beauty/skincare/moisturizers", image: "https://images.unsplash.com/photo-1571829425921-0d4b83b6720c?w=400&h=500&fit=crop&q=80" },
-            { name: "Cleansers", href: "/beauty/skincare/cleansers", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Serums", href: "/beauty/skincare/serums", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Sunscreen", href: "/beauty/skincare/sunscreen", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Face Masks", href: "/beauty/skincare/face-masks", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Eye Care", href: "/beauty/skincare/eye-care", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-          ].map((category, idx) => (
-            <Link 
-              key={idx}
-              href={category.href}
-              className="group block"
-            >
-              <div className="bg-white rounded-xl overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-300 group-hover:-translate-y-1">
-                <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+      {/* Main Content Area */}
+      <div className="container-premium py-16">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Filter */}
+          <div className="lg:w-1/4">
+            <FilterSidebar 
+              categories={Array.from(new Set(products.map(p => p.category)))}
+              brands={["The Ordinary", "CeraVe", "La Roche-Posay", "Kiehl's", "Clinique"]}
+              activeFilters={[]}
+              onFiltersChange={() => {}}
+              onFilterChange={(filters) => {}}
+            />
+          </div>
+          
+          {/* Product Grid */}
+          <div className="lg:w-3/4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="h2">All Skincare</h2>
+              <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+                View All →
+              </Link>
+            </div>
+            
+            {products.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product, idx) => (
+                  <ProductCard 
+                    key={product.id}
+                    product={product}
+                    index={idx}
+                    layout="grid"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-white font-bold text-lg">{category.name}</div>
-                </div>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-      
-      {/* Featured Products */}
-      <div className="container-premium pb-24">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Skincare</h2>
-          <Link href="/beauty/skincare" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
-            View All →
-          </Link>
-        </div>
-        
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product, idx) => (
-              <ProductCard 
-                key={product.id}
-                product={product}
-                index={idx}
-                layout="grid"
-              />
-            ))}
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-[#555555]">No skincare products available at the moment.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No skincare products available at the moment.</p>
-          </div>
-        )}
+        </div>
       </div>
       
       <Footer />

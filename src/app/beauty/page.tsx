@@ -23,8 +23,8 @@ export default function BeautyPage() {
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Beauty category
-        const beautyProducts = allProducts.filter(p => p.category === 'Beauty');
+        // Get featured products for the beauty page
+        const beautyProducts = allProducts.filter(p => p.category === 'Beauty').slice(0, 8);
         setProducts(beautyProducts);
       } catch (error) {
         console.error('Error fetching beauty products:', error);
@@ -35,23 +35,6 @@ export default function BeautyPage() {
     
     fetchProducts();
   }, [pathname]);
-  
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#F8F8F8]">
-        <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Beauty</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
   
   return (
     <div className="min-h-screen bg-[#F8F8F8]">
@@ -66,8 +49,8 @@ export default function BeautyPage() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl"
           >
-            <h1 className="h1 mb-4">Premium Beauty</h1>
-            <p className="text-xl mb-6">Luxury skincare, makeup, and grooming essentials</p>
+            <h1 className="h1 mb-4">Beauty & Personal Care</h1>
+            <p className="text-xl mb-6">Skincare, makeup & more</p>
             <div className="flex flex-wrap gap-4">
               <Link href="/beauty/skincare" className="btn-premium btn-primary !h-12 !px-8">
                 Shop Skincare
@@ -80,17 +63,15 @@ export default function BeautyPage() {
         </div>
       </div>
       
-      {/* Category Navigation */}
+      {/* Subcategory Navigation */}
       <div className="container-premium py-12">
         <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: "Skincare", href: "/beauty/skincare", image: "https://images.unsplash.com/photo-1571829425921-0d4b83b6720c?w=400&h=500&fit=crop&q=80" },
-            { name: "Haircare", href: "/beauty/haircare", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {[{ name: "Skincare", href: "/beauty/skincare", image: "https://images.unsplash.com/photo-1571829425921-0d4b83b6720c?w=400&h=500&fit=crop&q=80" },
             { name: "Makeup", href: "/beauty/makeup", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Fragrances", href: "/beauty/fragrances", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Grooming", href: "/beauty/grooming", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Tools", href: "/beauty/tools", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
+            { name: "Haircare", href: "/beauty/haircare", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
+            { name: "Fragrances", href: "/beauty/fragrances", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=500&fit=crop&q=80" },
+            { name: "Grooming", href: "/beauty/grooming", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" }
           ].map((category, idx) => (
             <Link 
               key={idx}
@@ -117,13 +98,19 @@ export default function BeautyPage() {
       {/* Featured Products */}
       <div className="container-premium pb-24">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Beauty Products</h2>
-          <Link href="/beauty" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+          <h2 className="h2">Featured Beauty</h2>
+          <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
             View All →
           </Link>
         </div>
         
-        {products.length > 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+        ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map((product, idx) => (
               <ProductCard 
@@ -133,10 +120,6 @@ export default function BeautyPage() {
                 layout="grid"
               />
             ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No beauty products available at the moment.</p>
           </div>
         )}
       </div>

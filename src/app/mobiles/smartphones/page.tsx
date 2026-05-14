@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award } from "lucide-react";
@@ -13,16 +14,28 @@ import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
 import { notFound } from "next/navigation";
+import FilterSidebar from "@/components/search/FilterSidebar";
+import NavigationLoader from "@/components/layout/NavigationLoader";
 
 export default function SmartphonesPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   
+  const pathname = usePathname();
+  
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Electronics category (since no specific Smartphone subcategory exists)
-        const smartphoneProducts = allProducts.filter(p => p.category === 'Electronics'); 
+        // Get smartphone products - filter by category and keyword matching
+        const smartphoneProducts = allProducts.filter(p => 
+          p.category === 'Electronics' && 
+          (p.name.toLowerCase().includes('smartphone') || 
+           p.name.toLowerCase().includes('iphone') || 
+           p.name.toLowerCase().includes('pixel') ||
+           p.name.toLowerCase().includes('galaxy') ||
+           p.name.toLowerCase().includes('oneplus') ||
+           p.description.toLowerCase().includes('smartphone'))
+        ).slice(0, 8);
         setProducts(smartphoneProducts);
       } catch (error) {
         console.error('Error fetching smartphone products:', error);
@@ -32,20 +45,13 @@ export default function SmartphonesPage() {
     };
     
     fetchProducts();
-  }, []);
+  }, [pathname]);
   
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F8F8F8]">
         <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Smartphones</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
+        <NavigationLoader />
         <Footer />
       </div>
     );
@@ -78,66 +84,52 @@ export default function SmartphonesPage() {
         </div>
       </div>
       
-      {/* Subcategory Navigation */}
+      {/* Main Content Area */}
       <div className="container-premium py-12">
-        <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: "Flagship", href: "/mobiles/smartphones/flagship", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-            { name: "Budget", href: "/mobiles/smartphones/budget", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-            { name: "Gaming", href: "/mobiles/smartphones/gaming", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-            { name: "Camera", href: "/mobiles/smartphones/camera", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-            { name: "Foldable", href: "/mobiles/smartphones/foldable", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-            { name: "5G", href: "/mobiles/smartphones/5g", image: "https://images.unsplash.com/photo-1593642634443-78ec7571ae3d?w=400&h=500&fit=crop&q=80" },
-          ].map((category, idx) => (
-            <Link 
-              key={idx}
-              href={category.href}
-              className="group block"
-            >
-              <div className="bg-white rounded-xl overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-300 group-hover:-translate-y-1">
-                <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Filter */}
+          <div className="lg:w-1/4">
+            <FilterSidebar 
+              categories={Array.from(new Set(products.map(p => p.category)))}
+              brands={["Apple", "Samsung", "Google", "OnePlus", "Xiaomi", "Oppo"]}
+              activeFilters={[]}
+              onFiltersChange={() => {}}
+              onFilterChange={(filters) => {}}
+            />
+          </div>
+          
+          {/* Product Grid */}
+          <div className="lg:w-3/4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="h2">All Smartphones</h2>
+              <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+                View All →
+              </Link>
+            </div>
+            
+            {products.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product, idx) => (
+                  <ProductCard 
+                    key={product.id}
+                    product={product}
+                    index={idx}
+                    layout="grid"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-white font-bold text-lg">{category.name}</div>
-                </div>
+                ))}
               </div>
-            </Link>
-          ))}
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-[#555555]">No smartphones available at the moment.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       
-      {/* Featured Products */}
-      <div className="container-premium pb-24">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Smartphones</h2>
-          <Link href="/mobiles/smartphones" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
-            View All →
-          </Link>
-        </div>
-        
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product, idx) => (
-              <ProductCard 
-                key={product.id}
-                product={product}
-                index={idx}
-                layout="grid"
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No smartphones available at the moment.</p>
-          </div>
-        )}
-      </div>
+
+
+
       
       <Footer />
     </div>

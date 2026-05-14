@@ -14,9 +14,10 @@ import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
 import { notFound } from "next/navigation";
+import FilterSidebar from "@/components/search/FilterSidebar";
+import NavigationLoader from "@/components/layout/NavigationLoader";
 
 export default function HeadphonesPage() {
-  // Get current pathname for browser back button navigation
   const pathname = usePathname();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,8 +25,14 @@ export default function HeadphonesPage() {
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Electronics category only (no subcategory data in products)
-        const headphoneProducts = allProducts.filter(p => p.category === 'Electronics');
+        // Get headphone products - filter by category and keyword matching
+        const headphoneProducts = allProducts.filter(p => 
+          p.category === 'Electronics' && 
+          (p.name.toLowerCase().includes('headphone') || 
+           p.name.toLowerCase().includes('earbud') || 
+           p.name.toLowerCase().includes('airpod') ||
+           p.description.toLowerCase().includes('headphone'))
+        ).slice(0, 8);
         setProducts(headphoneProducts);
       } catch (error) {
         console.error('Error fetching headphone products:', error);
@@ -41,14 +48,7 @@ export default function HeadphonesPage() {
     return (
       <div className="min-h-screen bg-[#F8F8F8]">
         <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Headphones</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
+        <NavigationLoader />
         <Footer />
       </div>
     );
@@ -59,7 +59,7 @@ export default function HeadphonesPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white py-20">
+      <div className="bg-gradient-to-r from-[#111111] to-[#333333] text-white py-20">
         <div className="container-premium">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -67,79 +67,61 @@ export default function HeadphonesPage() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl"
           >
-            <h1 className="h1 mb-4">Premium Headphones</h1>
-            <p className="text-xl mb-6">Immersive audio experiences for every lifestyle</p>
+            <h1 className="h1 mb-4">Headphones</h1>
+            <p className="text-xl mb-6">Premium audio experiences</p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/electronics/headphones/wireless" className="btn-premium btn-primary !h-12 !px-8">
-                Shop Wireless
+              <Link href="/electronics/headphones" className="btn-premium btn-primary !h-12 !px-8">
+                Shop All Headphones
               </Link>
-              <Link href="/electronics/headphones/wired" className="btn-premium !h-12 !px-8 bg-white text-[#7C3AED] hover:bg-gray-100">
-                Shop Wired
+              <Link href="/electronics" className="btn-premium !h-12 !px-8 bg-white text-[#111111] hover:bg-gray-100">
+                Back to Electronics
               </Link>
             </div>
           </motion.div>
         </div>
       </div>
       
-      {/* Subcategory Navigation */}
+      {/* Main Content Area */}
       <div className="container-premium py-12">
-        <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: "Wireless", href: "/electronics/headphones/wireless", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-            { name: "Wired", href: "/electronics/headphones/wired", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-            { name: "Gaming", href: "/electronics/headphones/gaming", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-            { name: "Studio", href: "/electronics/headphones/studio", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-            { name: "Earbuds", href: "/electronics/headphones/earbuds", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-            { name: "Noise-Cancelling", href: "/electronics/headphones/noise-cancelling", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=500&fit=crop&q=80" },
-          ].map((category, idx) => (
-            <Link 
-              key={idx}
-              href={category.href}
-              className="group block"
-            >
-              <div className="bg-white rounded-xl overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-300 group-hover:-translate-y-1">
-                <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Filter */}
+          <div className="lg:w-1/4">
+            <FilterSidebar 
+              categories={Array.from(new Set(products.map(p => p.category)))}
+              brands={["Apple", "Sony", "Bose", "Sennheiser", "Jabra"]}
+              activeFilters={[]}
+              onFiltersChange={() => {}}
+              onFilterChange={(filters) => {}}
+            />
+          </div>
+          
+          {/* Product Grid */}
+          <div className="lg:w-3/4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="h2">All Headphones</h2>
+              <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+                View All →
+              </Link>
+            </div>
+            
+            {products.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product, idx) => (
+                  <ProductCard 
+                    key={product.id}
+                    product={product}
+                    index={idx}
+                    layout="grid"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-white font-bold text-lg">{category.name}</div>
-                </div>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-      
-      {/* Featured Products */}
-      <div className="container-premium pb-24">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Headphones</h2>
-          <Link href="/electronics/headphones" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
-            View All →
-          </Link>
-        </div>
-        
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product, idx) => (
-              <ProductCard 
-                key={product.id}
-                product={product}
-                index={idx}
-                layout="grid"
-              />
-            ))}
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-[#555555]">No headphones available at the moment.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No headphones available at the moment.</p>
-          </div>
-        )}
+        </div>
       </div>
       
       <Footer />

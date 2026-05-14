@@ -26,5 +26,9 @@ export default function NavigationLoader() {
     return null;
   }
 
-  return <Loading />;
+  return (
+    <div className="loading-overlay">
+      <Loading />
+    </div>
+  );
 }

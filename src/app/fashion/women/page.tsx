@@ -14,6 +14,8 @@ import type { Product } from "@/types";
 import Link from "next/link";
 import { allProducts } from "@/data/products";
 import { notFound } from "next/navigation";
+import FilterSidebar from "@/components/search/FilterSidebar";
+import NavigationLoader from "@/components/layout/NavigationLoader";
 
 export default function WomenClothingPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -24,8 +26,16 @@ export default function WomenClothingPage() {
   useEffect(() => {
     const fetchProducts = () => {
       try {
-        // Filter products by Fashion category only (no subcategory data in products)
-        const womenProducts = allProducts.filter(p => p.category === 'Fashion');
+        // Get women's clothing products - filter by category and keyword matching
+        const womenProducts = allProducts.filter(p => 
+          p.category === 'Fashion' && 
+          (p.name.toLowerCase().includes('women') || 
+           p.name.toLowerCase().includes('womens') || 
+           p.name.toLowerCase().includes('dress') ||
+           p.name.toLowerCase().includes('skirt') ||
+           p.name.toLowerCase().includes('blouse') ||
+           p.description.toLowerCase().includes('women'))
+        ).slice(0, 8);
         setProducts(womenProducts);
       } catch (error) {
         console.error('Error fetching women clothing products:', error);
@@ -41,14 +51,7 @@ export default function WomenClothingPage() {
     return (
       <div className="min-h-screen bg-[#F8F8F8]">
         <Navbar />
-        <div className="container-premium py-16">
-          <h1 className="h1 mb-8">Women's Clothing</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        </div>
+        <NavigationLoader />
         <Footer />
       </div>
     );
@@ -67,7 +70,7 @@ export default function WomenClothingPage() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl"
           >
-            <h1 className="h1 mb-4">Women's Clothing</h1>
+            <h1 className="h1 mb-4">Women&apos;s Clothing</h1>
             <p className="text-xl mb-6">Elegant apparel for the modern woman</p>
             <div className="flex flex-wrap gap-4">
               <Link href="/fashion/women" className="btn-premium btn-primary !h-12 !px-8">
@@ -81,65 +84,47 @@ export default function WomenClothingPage() {
         </div>
       </div>
       
-      {/* Subcategory Navigation */}
+      {/* Main Content Area */}
       <div className="container-premium py-12">
-        <h2 className="h2 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[  
-            { name: "Women's Clothing", href: "/fashion/women", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Men's Clothing", href: "/fashion/men", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Kids' Wear", href: "/fashion/kids", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3241?w=400&h=500&fit=crop&q=80" },
-            { name: "Footwear", href: "/fashion/footwear", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3241?w=400&h=500&fit=crop&q=80" },
-            { name: "Watches", href: "/fashion/watches", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=500&fit=crop&q=80" },
-            { name: "Bags & Wallets", href: "/fashion/bags", image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=500&fit=crop&q=80" },
-          ].map((category, idx) => (
-            <Link 
-              key={idx}
-              href={category.href}
-              className="group block"
-            >
-              <div className="bg-white rounded-xl overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-300 group-hover:-translate-y-1">
-                <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar Filter */}
+          <div className="lg:w-1/4">
+            <FilterSidebar 
+              categories={Array.from(new Set(products.map(p => p.category)))}
+              brands={["Nike", "Adidas", "Zara", "H&M", "Calvin Klein"]}
+              activeFilters={[]}
+              onFiltersChange={() => {}}
+              onFilterChange={(filters) => {}}
+            />
+          </div>
+          
+          {/* Product Grid */}
+          <div className="lg:w-3/4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="h2">All Women&apos;s Clothing</h2>
+              <Link href="/products" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
+                View All →
+              </Link>
+            </div>
+            
+            {products.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {products.map((product, idx) => (
+                  <ProductCard 
+                    key={product.id}
+                    product={product}
+                    index={idx}
+                    layout="grid"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-white font-bold text-lg">{category.name}</div>
-                </div>
+                ))}
               </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-      
-      {/* Featured Products */}
-      <div className="container-premium pb-24">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="h2">Featured Women's Clothing</h2>
-          <Link href="/fashion/women" className="text-[#DC2626] font-semibold hover:text-[#B91C1C] transition-colors">
-            View All →
-          </Link>
-        </div>
-        
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product, idx) => (
-              <ProductCard 
-                key={product.id}
-                product={product}
-                index={idx}
-                layout="grid"
-              />
-            ))}
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-[#555555]">No women&apos;s clothing available at the moment.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-lg text-[#555555]">No women's clothing available at the moment.</p>
-          </div>
-        )}
+        </div>
       </div>
       
       <Footer />

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[9999] bg-[#F8F8F8] flex flex-col items-center justify-center">
+    <div className="bg-[#F8F8F8] flex flex-col items-center justify-center">
       {/* Brand Focal Point */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
