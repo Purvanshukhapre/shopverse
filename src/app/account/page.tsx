@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Star, ShoppingCart, Zap, CheckCircle, Truck, Shield, RotateCcw, Share2, Heart, ChevronDown, Filter, Users, Package, Award, User, Mail, Phone, MapPin, Calendar, Settings, LogOut } from "lucide-react";
