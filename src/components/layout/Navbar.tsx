@@ -20,6 +20,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { setSearchOpen } from "@/store/slices/uiSlice";
 import Link from "next/link";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
+import AccountDropdown from "./AccountDropdown";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -130,21 +131,8 @@ export default function Navbar() {
             {/* Right Actions */}
             <div className="flex items-center gap-2 md:gap-4">
               {/* Account */}
-              <Link
-                href="/auth/login"
-                className="hidden md:flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all group"
-                aria-label="Account"
-              >
-                <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                  <User className="w-5 h-5 text-[#555555] group-hover:text-[#111111]" />
-                </div>
-                <span className="hidden lg:block text-left">
-                  <span className="block text-[10px] text-[#777777] font-bold uppercase tracking-tight leading-none mb-1">Account</span>
-                  <span className="text-xs font-black text-[#111111] flex items-center gap-0.5">
-                    Sign In <ChevronDown className="w-3 h-3" />
-                  </span>
-                </span>
-              </Link>
+              <AccountDropdown />
+
 
               <div className="w-px h-8 bg-gray-100 hidden md:block" />
 

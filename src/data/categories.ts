@@ -34,7 +34,7 @@ export const categories: Category[] = [
   {
     id: "cat-3",
     name: "Home & Furniture",
-    slug: "furniture",
+    slug: "home",
     image: "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=400&h=500&fit=crop&q=80",
     itemCount: 9800,
     description: "Modern living spaces",
