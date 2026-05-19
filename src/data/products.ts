@@ -302,6 +302,294 @@ export const allProducts: Product[] = [
     badge: "Most Wished",
     inStock: true,
     description: "AirPods Pro feature up to 2x more Active Noise Cancellation, plus Adaptive Transparency and Personalized Spatial Audio."
+  },
+  {
+    id: "ac-1",
+    name: "Nike Dri-FIT Training T-Shirt",
+    slug: "nike-dri-fit-training-tshirt",
+    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1200&auto=format&fit=crop",
+    price: 1499,
+    originalPrice: 2999,
+    rating: 4.8,
+    reviewCount: 1243,
+    category: "Sports",
+    badge: "Best Seller",
+    inStock: true,
+    description: "Premium Nike training t-shirt with moisture-wicking technology for intense workouts.",
+    features: [
+      "Dri-FIT moisture-wicking fabric",
+      "Lightweight and breathable",
+      "4-way stretch for freedom of movement",
+      "Flatlock seams to reduce chafing"
+    ],
+    variants: {
+      colors: ["Black", "White", "Blue", "Red", "Gray"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-2",
+    name: "Adidas Performance Shorts",
+    slug: "adidas-performance-shorts",
+    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=1200&auto=format&fit=crop",
+    price: 1299,
+    originalPrice: 2499,
+    rating: 4.6,
+    reviewCount: 892,
+    category: "Sports",
+    badge: "Trending",
+    inStock: true,
+    description: "Lightweight Adidas shorts designed for maximum comfort during sports activities.",
+    features: [
+      "Climalite moisture-wicking fabric",
+      "Ergonomic fit for natural movement",
+      "Built-in brief for added support",
+      "Zippered back pocket for secure storage"
+    ],
+    variants: {
+      colors: ["Black", "Navy", "Gray", "Red"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-3",
+    name: "Under Armour Compression Tee",
+    slug: "under-armour-compression-tee",
+    image: "https://images.unsplash.com/photo-1618354691551-44de113f0164?q=80&w=1200&auto=format&fit=crop",
+    price: 1999,
+    originalPrice: 3999,
+    rating: 4.9,
+    reviewCount: 1560,
+    category: "Sports",
+    badge: "Top Rated",
+    inStock: true,
+    description: "Under Armour compression tee for enhanced muscle support and recovery.",
+    features: [
+      "Compression fabric for muscle support",
+      "Moisture Transport System",
+      "4-way stretch construction",
+      "Anti-odor technology"
+    ],
+    variants: {
+      colors: ["Black", "Blue", "Purple", "Gray"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-4",
+    name: "Puma Running Activewear Set",
+    slug: "puma-running-activewear-set",
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop",
+    price: 2499,
+    originalPrice: 4999,
+    rating: 4.7,
+    reviewCount: 711,
+    category: "Sports",
+    badge: "New Arrival",
+    inStock: true,
+    description: "Complete Puma running set including top and bottoms for optimal performance.",
+    features: [
+      "DryCell moisture-wicking technology",
+      "Lightweight and flexible fabric",
+      "Reflective details for visibility",
+      "Ergonomic seam placement"
+    ],
+    variants: {
+      colors: ["Black", "Blue", "Red", "Green"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-5",
+    name: "Reebok Gym Training Tank",
+    slug: "reebok-gym-training-tank",
+    image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?q=80&w=1200&auto=format&fit=crop",
+    price: 999,
+    originalPrice: 1999,
+    rating: 4.5,
+    reviewCount: 623,
+    category: "Sports",
+    badge: "Value Pick",
+    inStock: true,
+    description: "Breathable Reebok tank top designed for gym sessions and weight training.",
+    features: [
+      "Speedwick moisture-wicking fabric",
+      "Loose fit for unrestricted movement",
+      "Racerback design for shoulder mobility",
+      "Mesh panels for ventilation"
+    ],
+    variants: {
+      colors: ["Black", "Gray", "Blue", "Purple"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-6",
+    name: "Asics Performance Joggers",
+    slug: "asics-performance-joggers",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
+    price: 2299,
+    originalPrice: 4299,
+    rating: 4.8,
+    reviewCount: 834,
+    category: "Sports",
+    badge: "Premium",
+    inStock: true,
+    description: "Asics joggers with moisture-wicking fabric and comfortable fit for all activities.",
+    features: [
+      "MotionDry moisture management",
+      "Elastic waistband with drawcord",
+      "Tapered leg for modern fit",
+      "Side pockets for convenience"
+    ],
+    variants: {
+      colors: ["Black", "Gray", "Navy", "Green"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-7",
+    name: "Nike Pro Compression Shorts",
+    slug: "nike-pro-compression-shorts",
+    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=1200&auto=format&fit=crop",
+    price: 1799,
+    originalPrice: 3499,
+    rating: 4.9,
+    reviewCount: 2011,
+    category: "Sports",
+    badge: "Editor's Choice",
+    inStock: true,
+    description: "Nike Pro compression shorts for maximum muscle support and reduced fatigue.",
+    features: [
+      "Dri-FIT fabric with compression",
+      "Flatlock seams for comfort",
+      "Elastic waistband with internal drawcord",
+      "Laser-cut ventilation zones"
+    ],
+    variants: {
+      colors: ["Black", "Blue", "Red", "Purple"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-8",
+    name: "Adidas ClimaCool Hoodie",
+    slug: "adidas-climacool-hoodie",
+    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1200&auto=format&fit=crop",
+    price: 2999,
+    originalPrice: 5999,
+    rating: 4.7,
+    reviewCount: 943,
+    category: "Sports",
+    badge: "Limited Edition",
+    inStock: true,
+    description: "Adidas ClimaCool hoodie with advanced ventilation technology for active wear.",
+    features: [
+      "ClimaCool ventilation system",
+      "Lightweight cotton-polyester blend",
+      "Kangaroo pocket for storage",
+      "Ribbed cuffs and hem for secure fit"
+    ],
+    variants: {
+      colors: ["Black", "Gray", "Blue", "Red"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-9",
+    name: "Puma DryCell Sports Tee",
+    slug: "puma-drycell-sports-tee",
+    image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop",
+    price: 1399,
+    originalPrice: 2699,
+    rating: 4.4,
+    reviewCount: 420,
+    category: "Sports",
+    badge: "Hot Deal",
+    inStock: true,
+    description: "Puma DryCell sports tee with quick-drying technology for intense training.",
+    features: [
+      "DryCell moisture-wicking fabric",
+      "Soft and comfortable feel",
+      "Modern athletic fit",
+      "Reflective Puma logo"
+    ],
+    variants: {
+      colors: ["Black", "White", "Blue", "Red"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-10",
+    name: "Gymshark Seamless Leggings",
+    slug: "gymshark-seamless-leggings",
+    image: "https://images.unsplash.com/photo-1506629905607-45b4ad0f3f0d?q=80&w=1200&auto=format&fit=crop",
+    price: 2499,
+    originalPrice: 4499,
+    rating: 4.9,
+    reviewCount: 3221,
+    category: "Sports",
+    badge: "Best Seller",
+    inStock: true,
+    description: "Gymshark seamless leggings with four-way stretch and squat-proof fabric.",
+    features: [
+      "Seamless construction for comfort",
+      "High-waisted design for support",
+      "Squat-proof fabric",
+      "Four-way stretch for flexibility"
+    ],
+    variants: {
+      colors: ["Black", "Navy", "Gray", "Purple"],
+      sizes: ["XS", "S", "M", "L", "XL"]
+    }
+  },
+  {
+    id: "ac-11",
+    name: "Nike Running Windbreaker",
+    slug: "nike-running-windbreaker",
+    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop",
+    price: 3999,
+    originalPrice: 6999,
+    rating: 4.8,
+    reviewCount: 1544,
+    category: "Sports",
+    badge: "Premium",
+    inStock: true,
+    description: "Lightweight Nike windbreaker for running and outdoor activities.",
+    features: [
+      "Water-repellent fabric",
+      "Lightweight and packable",
+      "Adjustable hood for perfect fit",
+      "Zippered hand pockets"
+    ],
+    variants: {
+      colors: ["Black", "Blue", "Red", "Gray"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+  },
+  {
+    id: "ac-12",
+    name: "Under Armour Gym Joggers",
+    slug: "under-armour-gym-joggers",
+    image: "https://images.unsplash.com/photo-1506629905607-45b4ad0f3f0d?q=80&w=1200&auto=format&fit=crop",
+    price: 2799,
+    originalPrice: 4999,
+    rating: 4.7,
+    reviewCount: 1119,
+    category: "Sports",
+    badge: "New Launch",
+    inStock: true,
+    description: "Under Armour gym joggers with moisture-wicking technology and comfortable fit.",
+    features: [
+      "HeatGear moisture-wicking fabric",
+      "Elastic waistband with drawcord",
+      "Tapered ankle for modern look",
+      "Side pockets for convenience"
+    ],
+    variants: {
+      colors: ["Black", "Gray", "Navy", "Blue"],
+      sizes: ["S", "M", "L", "XL", "XXL"]
+    }
   }
 ];
 
